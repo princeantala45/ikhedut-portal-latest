@@ -190,5 +190,5 @@ LOGIN_REDIRECT_URL = "/userprofile/"
 LOGOUT_REDIRECT_URL = "/login/"
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://ikhedut-portal.onrender.com",
+    "https://ikhedut-portal-latest.onrender.com",
 ]
