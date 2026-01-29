@@ -10,27 +10,22 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
+from datetime import timedelta
+
+import os
 from pathlib import Path
 from datetime import timedelta
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-import os
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
-DEBUG = os.environ.get("DEBUG") == "True"
-# DEBUG =True
+DEBUG = False
 
-ALLOWED_HOSTS = os.environ.get(
-    "ALLOWED_HOSTS", ""
-).split(",")
-
+ALLOWED_HOSTS = [
+    "ikhedut-portal-latest.onrender.com",
+    ".onrender.com",
+]
 
 INSTALLED_APPS = [
     "jazzmin",
@@ -119,16 +114,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
+from pathlib import Path
 
-STATIC_URL = '/static/'
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Where collectstatic puts files (production)
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
-# Where your source static files live (development)
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / "ikhedut_portal" / "static",
 ]
+
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -182,7 +179,7 @@ EMAIL_HOST_USER=os.environ.get("EMAIL_HOST_USER")
 # EMAIL_HOST_PASSWORD = "fnrz lzsc tqwm xtdl"
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = "Ikhedut Portal Support <princeantala7@gmail.com>"
-
+ 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/userprofile/"
 LOGOUT_REDIRECT_URL = "/login/"
