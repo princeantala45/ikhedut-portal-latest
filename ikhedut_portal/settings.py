@@ -18,15 +18,17 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-dev-key")
+
 
 DEBUG = False
 
 ALLOWED_HOSTS = [
     "ikhedut-portal-latest.onrender.com",
-    ".onrender.com",
+    "localhost",
+    "127.0.0.1",
 ]
-
+   
 INSTALLED_APPS = [
     "jazzmin",
     # 'unfold',
@@ -184,3 +186,18 @@ LOGOUT_REDIRECT_URL = "/login/"
 CSRF_TRUSTED_ORIGINS = [
     "https://ikhedut-portal-latest.onrender.com",
 ]
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "ERROR",
+    },
+}
