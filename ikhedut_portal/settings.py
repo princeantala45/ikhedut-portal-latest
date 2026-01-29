@@ -23,12 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 import os
 
-SECRET_KEY = os.environ.get(
-    "SECRET_KEY",
-    "1b604c7567ae32d0bf02685eb94bb43e"
-)
+SECRET_KEY = os.environ.get("9baef889da7477e3a832eff892f06950")
 
-DEBUG = True
+DEBUG = os.environ.get("DEBUG") == "True"
+
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "ikhedut-portal.onrender.com",
@@ -175,7 +174,6 @@ SIMPLE_JWT = {
 }
 
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
@@ -191,3 +189,7 @@ DEFAULT_FROM_EMAIL = "Ikhedut Portal Support <princeantala7@gmail.com>"
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/userprofile/"
 LOGOUT_REDIRECT_URL = "/login/"
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://ikhedut-portal.onrender.com",
+]
