@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% block title %}Buy Crops{% endblock title %}
+
+{% block content %}
+<input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+<div class="max-w-7xl mx-auto px-6 py-10">
+
+  <!-- HEADER -->
+  <div class="text-center mb-10">
+    <h2 id="otherpageheader" class="text-3xl font-bold text-gray-900">
+      Buy Fresh Crops
+    </h2>
+    <p class="text-gray-500 mt-1 text-sm">
+      Quality produce directly from farmers
+    </p>
+  </div>
+
+  <!-- GRID -->
+  <div id="cropGrid" class="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  </div>
+</div>
+<script>
+  const API_URL = "/api/buy-crops/";
+  const CSRF_TOKEN = document.getElementById("csrfToken").value;
+  const grid = document.getElementById("cropGrid");
+
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(crops => {
+      crops.forEach(crop => {
+        grid.insertAdjacentHTML("beforeend", renderCrop(crop));
+      });
+    });
+
+  function renderCrop(crop) {
+  console.log("CROP:", crop);
+
+    const quantity =  
+      parseInt(
+        crop.total_quantity ??
+        crop.quantity ??
+        crop.stock ??
+        0,
+        10
+      );
+
+    const inStock = quantity >= 20;
+
+    return `
+  <div class="group bg-white border rounded-xl p-3 flex flex-col
+              transition-all duration-300
+              hover:-translate-y-0.5 hover:shadow-lg">
+
+    ${crop.image ? `
+      <div class="h-40 mb-3 rounded-lg overflow-hidden bg-gray-100">
+        <img src="${crop.image}"
+             class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+             alt="${crop.crop}">
+      </div>` : ""}
+
+    <h3 class="text-base font-semibold text-gray-900 text-center">
+      ${crop.crop}
+    </h3>
+
+    <p class="text-xs text-gray-500 text-center mt-1">
+     Avalible Quantity : ${quantity} KG
+    </p>
+
+    <p class="text-lg font-bold text-green-700 text-center mt-2">
+      ₹${crop.price}
+      <span class="text-xs font-medium text-gray-500">20 / KG</span>
+    </p>
+
+    ${inStock ? `
+      <div class="flex items-center justify-center gap-2 mb-3">
+        <button type="button" class="qty-btn decrement" data-min="20">−</button>
+        <span class="qty-value qty-box">20</span>
+        <button type="button" class="qty-btn increment"
+                data-max="${quantity}">+</button>
+      </div>
+
+      <input type="hidden" class="quantity-input" value="20">
+      <div class="flex justify-center">
+       <button type="button"
+        class="cssbuttons-io-button add-to-cart"
+        data-crop="${crop.crop}">
+          Add to Cart
+          <div class="icon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                    fill="currentColor"></path>
+            </svg>
+          </div>
+        </button>
+      </div>
+
+    ` : `
+    <div class="mt-auto pt-4">
+      <button disabled
+              class="w-full bg-gray-200 text-gray-500 py-2 rounded-lg
+                     text-sm font-semibold cursor-not-allowed">
+        Out of Stock
+      </button>
+    </div>`}
+  </div>`;
+  }
+</script>
+
+<script>
+  let holdInterval = null;
+  const STEP = 1; // 20 KG per step
+
+  function updateQty(btn, direction) {
+    const card = btn.closest(".group");
+    const valueEl = card.querySelector(".qty-value");
+    const input = card.querySelector(".quantity-input");
+
+    let qty = parseInt(valueEl.innerText, 10);
+    const min = parseInt(btn.dataset.min || STEP, 10);
+    const max = parseInt(btn.dataset.max || qty, 10);
+
+    if (direction === "inc" && qty + STEP <= max) {
+      qty += STEP;
+    }
+
+    if (direction === "dec" && qty - STEP >= min) {
+      qty -= STEP;
+    }
+
+    valueEl.innerText = qty;
+    input.value = qty;
+  }
+
+  function startHold(btn, direction) {
+    updateQty(btn, direction);
+    holdInterval = setInterval(() => {
+      updateQty(btn, direction);
+    }, 150);
+  }
+
+  function stopHold() {
+    if (holdInterval) {
+      clearInterval(holdInterval);
+      holdInterval = null;
+    }
+  }
+
+  document.addEventListener("mousedown", function (e) {
+    if (e.target.classList.contains("increment")) {
+      startHold(e.target, "inc");
+    }
+    if (e.target.classList.contains("decrement")) {
+      startHold(e.target, "dec");
+    }
+  });
+
+  document.addEventListener("mouseup", stopHold);
+  document.addEventListener("mouseleave", stopHold);
+
+  document.addEventListener("touchstart", function (e) {
+    if (e.target.classList.contains("increment")) {
+      e.preventDefault();
+      startHold(e.target, "inc");
+    }
+    if (e.target.classList.contains("decrement")) {
+      e.preventDefault();
+      startHold(e.target, "dec");
+    }
+  }, { passive: false });
+
+  document.addEventListener("touchend", stopHold);
+</script>
+
+<script>
+  document.addEventListener("click", function (e) {
+    if (!e.target.closest(".add-to-cart")) return;
+
+    const btn = e.target.closest(".add-to-cart");
+    const card = btn.closest(".group");
+
+    const cropName = btn.dataset.crop;
+    const qty = parseInt(card.querySelector(".quantity-input").value, 10);
+
+    fetch("/api/cart/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": CSRF_TOKEN
+      },
+      body: JSON.stringify({
+        crop_name: cropName,
+        quantity: qty
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          alert("Added to cart");
+          window.location.href = "/cart/";
+        } else {
+          alert(data.error || "Failed to add");
+        }
+      })
+      .catch(() => {
+        alert("Server error");
+      });
+  });
+</script>
+
+<!-- STYLES -->
+<style>
+  .qty-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: #f3f4f6;
+    font-size: 18px;
+    font-weight: 700;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    transition: background 0.15s, transform 0.1s;
+  }
+
+  .qty-btn:hover {
+    background: #e5e7eb;
+  }
+
+  .qty-btn:active {
+    transform: scale(0.95);
+  }
+
+  .qty-box {
+    min-width: 34px;
+    height: 28px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+  }
+</style>
+
+{% endblock %}

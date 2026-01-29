@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+{% block body %}{% endblock body %}
+{% block title %}
+Fertilizer
+{% endblock title %}
+
+{% block content %}
+<div class="mb-12 text-center">
+  <h1 class="text-2xl sm:text-3xl pt-6 font-semibold text-green-700">
+    Fertilizer
+  </h1>
+</div>
+
+{% comment %} <main class="wrap">
+  <section class="grid">
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/Fertilizer/urea.jpg" alt="Urea fertilizer">
+      </div>
+      <div class="meta">
+        <h2>Urea</h2>
+        <div class="badge">45 kg</div>
+      </div>
+      <div class="desc">
+        <p>• <strong>Nutrient:</strong> High Nitrogen (N) content for rapid vegetative growth.</p>
+        <p>• <strong>Best for:</strong> Wheat, maize, rice and leafy vegetables.</p>
+        <p>• <strong>Benefits:</strong> Promotes quick leaf growth and early crop vigor.</p>
+      </div>
+      <p class="price">Approx. Price: ₹270–300</p>
+    </article>
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/Fertilizer/dap.jpg" alt="DAP fertilizer">
+      </div>
+      <div class="meta">
+        <h2>DAP (Di-ammonium Phosphate)</h2>
+        <div class="badge">50 kg</div>
+      </div>
+      <div class="desc">
+        <p>• <strong>Nutrient:</strong> Phosphorus (P) + Nitrogen (N).</p>
+        <p>• <strong>Best for:</strong> Basal application at sowing to support root development.</p>
+        <p>• <strong>Benefits:</strong> Strengthens early-stage crop growth and root establishment.</p>
+      </div>
+      <p class="price">Approx. Price: ₹1350–1500</p>
+    </article>
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/Fertilizer/npk.jpg" alt="NPK fertilizer">
+      </div>
+      <div class="meta">
+        <h2>NPK</h2>
+        <div class="badge">Varies</div>
+      </div>
+      <div class="desc">
+        <p>• <strong>Nutrient:</strong> Balanced Nitrogen, Phosphorus and Potassium mix.</p>
+        <p>• <strong>Best for:</strong> Fruiting crops, vegetables and balanced crop development.</p>
+        <p>• <strong>Benefits:</strong> Improves flowering, fruit set and overall plant health.</p>
+      </div>
+      <p class="price">Approx. Price: ₹1150–1450</p>
+    </article>
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/Fertilizer/mop.jpg" alt="MOP fertilizer">
+      </div>
+      <div class="meta">
+        <h2>MOP (Potash)</h2>
+        <div class="badge">50 kg</div>
+      </div>
+      <div class="desc">
+        <p>• <strong>Nutrient:</strong> High Potassium (K) content.</p>
+        <p>• <strong>Best for:</strong> Fruit crops and vegetables where quality matters.</p>
+        <p>• <strong>Benefits:</strong> Improves fruit size, sweetness and stress resistance.</p>
+      </div>
+      <p class="price">Approx. Price: ₹400–550</p>
+    </article>
+
+  </section>
+</main> {% endcomment %}
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<main class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+      <article class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
+        <div class="relative h-48 overflow-hidden">
+          <img src="/static/Fertilizer/urea.jpg" alt="Urea" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <span class="absolute top-4 right-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">45 kg</span>
+        </div>
+        
+        <div class="p-6 flex-grow">
+          <h2 class="text-xl font-bold text-gray-900 mb-3">Urea</h2>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Nutrient:</strong> High Nitrogen (N)</li>
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Best for:</strong> Wheat, Maize, Rice</li>
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Benefits:</strong> Rapid leaf growth</li>
+          </ul>
+        </div>
+
+        <div class="p-6 pt-0 mt-auto">
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <span class="text-lg font-bold text-emerald-700">₹270 – ₹300</span>
+            <button class="bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Details</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
+        <div class="relative h-48 overflow-hidden">
+          <img src="/static/Fertilizer/dap.jpg" alt="DAP" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <span class="absolute top-4 right-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">50 kg</span>
+        </div>
+        
+        <div class="p-6 flex-grow">
+          <h2 class="text-xl font-bold text-gray-900 mb-3 truncate" title="Di-ammonium Phosphate">DAP (Di-ammonium)</h2>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Nutrient:</strong> P + N</li>
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Best for:</strong> Basal application</li>
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Benefits:</strong> Stronger roots</li>
+          </ul>
+        </div>
+
+        <div class="p-6 pt-0 mt-auto">
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <span class="text-lg font-bold text-emerald-700">₹1350 – ₹1500</span>
+            <button class="bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Details</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
+        <div class="relative h-48 overflow-hidden">
+          <img src="/static/Fertilizer/npk.jpg" alt="NPK" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <span class="absolute top-4 right-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">Varies</span>
+        </div>
+        
+        <div class="p-6 flex-grow">
+          <h2 class="text-xl font-bold text-gray-900 mb-3">NPK</h2>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Nutrient:</strong> Balanced N-P-K</li>
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Best for:</strong> Fruit crops</li>
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Benefits:</strong> Flowering & Health</li>
+          </ul>
+        </div>
+
+        <div class="p-6 pt-0 mt-auto">
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <span class="text-lg font-bold text-emerald-700">₹1150 – ₹1450</span>
+            <button class="bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Details</button>
+          </div>
+        </div>
+      </article>
+
+      <article class="group bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
+        <div class="relative h-48 overflow-hidden">
+          <img src="/static/Fertilizer/mop.jpg" alt="Potash" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+          <span class="absolute top-4 right-4 bg-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">50 kg</span>
+        </div>
+        
+        <div class="p-6 flex-grow">
+          <h2 class="text-xl font-bold text-gray-900 mb-3">MOP (Potash)</h2>
+          <ul class="space-y-2 text-sm text-gray-600">
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Nutrient:</strong> High Potassium (K)</li>
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Best for:</strong> Sweetness & Size</li>
+            <li class="flex items-start"><span class="text-emerald-500 mr-2">•</span> <strong>Benefits:</strong> Stress resistance</li>
+          </ul>
+        </div>
+
+        <div class="p-6 pt-0 mt-auto">
+          <div class="flex items-center justify-between border-t border-gray-100 pt-4">
+            <span class="text-lg font-bold text-emerald-700">₹400 – ₹550</span>
+            <button class="bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors">Details</button>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </div>
+</main>
+<script>
+  const cards = document.querySelectorAll('[data-animate]');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  cards.forEach(c => obs.observe(c));
+</script>
+{% endblock content %}

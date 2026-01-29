@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Contact{% endblock title %}
+
+{% block content %}
+
+
+  <style>
+    .contact {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .contact-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 15px;
+    }
+
+    .contact-box i {
+      border: 2px solid;
+      border-radius: 100%;
+      padding: 10px;
+      font-size: 35px;
+      background-color: #dddddd;
+      color: rgb(101, 102, 103);
+      transition: transform 0.5s;
+    }
+
+    .contact-box:hover i {
+      transform: scale(1.3);
+    }
+
+    .contact-box p {
+      font-size: 18px;
+    }
+
+    .second {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 60px 20px;
+      flex-wrap: wrap;
+    }
+
+    .map {
+      flex: 1 1 50%;
+    }
+
+    .map iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 400px;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    .info-contact {
+      flex: 1 1 45%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .name,
+    .email,
+    .mobile-contact,
+    .message {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-contact input,
+    .info-contact textarea {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid;
+      background-color: white;
+      margin-top: 5px;
+      padding-left: 10px;
+      border-radius: 5px;
+    }
+
+    .info-contact input:focus-visible,
+    .info-contact textarea:focus-visible {
+      background-color: #f2ffde;
+      border: 1px solid transparent;
+      outline: none;
+      box-shadow: none;
+      transition: 0.8s;
+    }
+
+    /* Button Styling */
+
+    #b1 {
+      padding-top: 15px;
+      padding-bottom: 15px;
+      width: 120px;
+      font-size: 16px;
+      font-weight: 600;
+      border: 1px solid;
+      border-radius: 8px;
+      background-color: white;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    #b1:hover {
+      background-color: #9bc96d;
+      color: white;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 769px) {
+      .contact {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .second {
+        flex-direction: column;
+      }
+
+      .map,
+      .info-contact {
+        flex: 1 1 100%;
+      }
+
+      .info-contact {
+        padding-top: 30px;
+      }
+    }
+
+    @media (max-width: 426px) {
+      .contact {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box p {
+        font-size: 16px;
+        padding: 0 10px;
+      }
+
+      .map iframe {
+        height: 300px;
+      }
+
+      .info-contact {
+        padding: 20px 0;
+      }
+    }
+  </style>
+{% comment %} {% for message in messages %}
+<div id="alert-message" class="
+    {% if message.tags == 'error' %}
+      bg-red-100 text-red-700 border-red-300
+    {% else %}
+      bg-green-100 text-green-700 border-green-300
+    {% endif %}
+  ">
+  {{ message }}
+</div>
+{% endfor %} {% endcomment %}
+
+
+
+<section class="turf-header">
+  <h2 class="text-2xl sm:text-3xl font-bold text-center tracking-wide"
+    id="otherpageheader" style="padding-top:30px;">
+    Contact Us
+  </h2>
+</section>
+
+
+<section class="py-12 text-center">
+  <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-10 sm:gap-40 px-4">
+    <!-- Address -->
+    <div class="flex flex-col items-center">
+      <div class="w-20 h-20 flex items-center justify-center bg-gray-200 rounded-full border-2 border-gray-500 mb-4">
+        <i class="fas fa-map-marker-alt text-3xl text-gray-700"></i>
+      </div>
+      <h3 class="text-xl font-medium mb-1">Our Address</h3>
+      <p class="text-gray-500">Kharavad Plote, Dhoraji</p>
+    </div>
+
+    <!-- Contact -->
+    <div class="flex flex-col items-center">
+      <div class="w-20 h-20 flex items-center justify-center bg-gray-200 rounded-full border-2 border-gray-500 mb-4">
+        <i class="fas fa-phone text-2xl text-gray-700"></i>
+      </div>
+      <h3 class="text-xl font-medium mb-1">Contact</h3>
+      <p class="text-gray-500">7990972794</p>
+    </div>
+
+    <!-- Email -->
+    <div class="flex flex-col items-center">
+      <div class="w-20 h-20 flex items-center justify-center bg-gray-200 rounded-full border-2 border-gray-500 mb-4">
+        <i class="fas fa-envelope text-2xl text-gray-700"></i>
+      </div>
+      <h3 class="text-xl font-medium mb-1">Email</h3>
+      <p class="text-gray-500">princeantala45@gmail.com</p>
+    </div>
+
+    <!-- Hours -->
+    <div class="flex flex-col items-center">
+      <div class="w-20 h-20 flex items-center justify-center bg-gray-200 rounded-full border-2 border-gray-500 mb-4">
+        <i class="fas fa-clock text-2xl text-gray-700"></i>
+      </div>
+      <h3 class="text-xl font-medium mb-1">Hours Of Open</h3>
+      <p class="text-gray-500">24*7</p>
+    </div>
+
+  </div>
+</section>
+
+
+<form id="contactForm" method="post">
+  {% csrf_token %}
+
+  <div class="second">
+
+    <div class="map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3706.0809226168462!2d70.45333377382089!3d21.738388263030686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39581e408f96c621%3A0x1d5bd68d8944a7ff!2sMotu%20Chakar!5e0!3m2!1sen!2sin!4v1764850698605!5m2!1sen!2sin"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="info-contact">
+      <div class="name">
+        Your name (required)
+        <input type="text" name="name" required>
+      </div>
+      <div class="email">
+        Email address (required)
+        <input type="email" name="email" required>
+      </div>
+      <div class="mobile-contact">
+        Mobile number (required)
+        <input type="text" name="mobile" required>
+      </div>
+      <div class="message">
+        Message (required)
+        <textarea name="message" rows="10" required></textarea>
+      </div>
+      <button id="b1" type="submit" name="submit">Send</button>
+    </div>
+  </div>
+</form>
+</section>
+
+<script src="{% static 'js/main.js' %}"></script>
+<script>
+  // -----------------------------------message-----------------------------
+  setTimeout(function () {
+    const alert = document.getElementById("alert-message");
+    if (alert) {
+      alert.style.display = "none";
+    }
+  }, 2500); // 3 seconds
+</script>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    try {
+        const response = await fetch("/api/contact/", {
+            method: "POST",
+            credentials: "same-origin",   // important
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert("Your message has been sent successfully.");
+            this.reset();
+        } else {
+            console.error(data);
+            alert("Failed to send message.");
+        }
+    } catch (error) {
+        console.error(error);
+        alert("Server error. Please try again.");
+    }
+});
+</script>
+
+{% endblock content %}

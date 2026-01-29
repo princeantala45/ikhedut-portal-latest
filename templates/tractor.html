@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% block body %}{% endblock body %}
+{% block title %}Tractors{% endblock title %}
+
+{% block content %}
+<header class="headee">
+  <div class="mb-12 text-center">
+    <h1 class="text-2xl sm:text-3xl font-semibold text-green-700">
+      Popular Tractors in India
+    </h1>
+  </div>
+</header>
+
+<style>
+  /* Base Styling */
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: sans-serif;
+  }
+
+  /* Responsive Grid */
+  .grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  @media (min-width: 640px) {
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  /* Card Styling */
+  .card {
+    background: #fff;
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%; /* Ensures cards in a row are equal height */
+  }
+
+  /* Image Container - Increased Height Logic */
+  .media {
+    width: 100%;
+    background: #fff;
+    /* This ensures the container expands to show the full image */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .media img {
+    width: 100%;
+    /* Changed to auto to ensure the full height of the image is rendered */
+    height: auto; 
+    max-height: 300px; /* Limits excessive height on very large images while showing the full product */
+    display: block;
+    object-fit: contain; /* Ensures the image isn't cropped */
+    padding: 10px; /* Optional: gives the tractor a little breathing room */
+  }
+
+  /* Content Styling */
+  .meta {
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f3f4f6;
+    background: #fff;
+  }
+
+  .meta h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+  }
+
+  .badge {
+    background: #ecfdf5;
+    color: #059669;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+
+  .desc {
+    padding: 1.25rem;
+    flex-grow: 1;
+    font-size: 0.875rem;
+    color: #4b5563;
+    line-height: 1.5;
+  }
+
+  .desc p {
+    margin: 0.35rem 0;
+  }
+
+  .price {
+    padding: 1rem 1.25rem;
+    background: #f9fafb;
+    font-weight: 700;
+    color: #047857;
+    margin: 0;
+    border-top: 1px solid #e5e7eb;
+  }
+</style>
+
+<main class="wrap">
+  <section class="grid">
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/tractor-img/john-deer.webp" alt="John Deere Tractor">
+      </div>
+      <div class="meta">
+        <h2>John Deere 6105E</h2>
+        <div class="badge">55–75 HP</div>
+      </div>
+      <div class="desc">
+        <p>• Engine: 55–75 HP diesel engine</p>
+        <p>• Transmission: Smooth gear shifting</p>
+        <p>• Hydraulics: 1500–2000 kg capacity</p>
+        <p>• Brakes: Oil-immersed disc brakes</p>
+        <p>• Steering: Power steering</p>
+        <p>• Fuel Tank: 60–80 liter capacity</p>
+        <p>• Tyres: Strong grip performance</p>
+        <p>• Build: Durable with comfort cabin</p>
+      </div>
+      <p class="price">Price: ₹18 lakh – ₹22 lakh</p>
+    </article>
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/tractor-img/new-holland.webp" alt="New Holland Tractor">
+      </div>
+      <div class="meta">
+        <h2>New Holland T7 SWB</h2>
+        <div class="badge">150–180 HP</div>
+      </div>
+      <div class="desc">
+        <p>• Engine: 150–180 HP diesel engine</p>
+        <p>• Transmission: Auto/Power Command</p>
+        <p>• Hydraulics: High-capacity heavy lift</p>
+        <p>• Brakes: Heavy-duty oil-immersed</p>
+        <p>• Steering: Power with advanced control</p>
+        <p>• Fuel Tank: 90–110 liter capacity</p>
+        <p>• Tyres: Large tyres for traction</p>
+        <p>• Build: Premium comfortable cabin</p>
+      </div>
+      <p class="price">Price: ₹30 lakh – ₹35 lakh</p>
+    </article>
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/tractor-img/captain.webp" alt="Captain Tractor">
+      </div>
+      <div class="meta">
+        <h2>Captain 280 4WD</h2>
+        <div class="badge">28 HP</div>
+      </div>
+      <div class="desc">
+        <p>• Engine: 28 HP diesel engine</p>
+        <p>• Transmission: Smooth gear system</p>
+        <p>• Hydraulics: 650–800 kg lifting</p>
+        <p>• Brakes: Oil-immersed brakes</p>
+        <p>• Steering: Power / Mechanical</p>
+        <p>• Fuel Tank: 30–40 liter capacity</p>
+        <p>• Tyres: Strong for any terrain</p>
+        <p>• Build: Compact and durable</p>
+      </div>
+      <p class="price">Price: ₹4 lakh – ₹5 lakh</p>
+    </article>
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/tractor-img/swaraj.png" alt="Swaraj Tractor">
+      </div>
+      <div class="meta">
+        <h2>Swaraj 735 FE</h2>
+        <div class="badge">35–40 HP</div>
+      </div>
+      <div class="desc">
+        <p>• Engine: 35–40 HP diesel engine</p>
+        <p>• Transmission: 8 Forward + 2 Reverse</p>
+        <p>• Hydraulics: 1000 kg lifting capacity</p>
+        <p>• Brakes: Dry / Oil-immersed</p>
+        <p>• Steering: Mechanical / Power option</p>
+        <p>• Fuel Tank: 45–50 liter capacity</p>
+        <p>• Tyres: Durable performance</p>
+        <p>• Build: Strong and comfortable</p>
+      </div>
+      <p class="price">Price: ₹5 lakh – ₹6 lakh</p>
+    </article>
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/tractor-img/mf.jpg" alt="Massey Ferguson Tractor">
+      </div>
+      <div class="meta">
+        <h2>Massey Ferguson MF 5M</h2>
+        <div class="badge">110–140 HP</div>
+      </div>
+      <div class="desc">
+        <p>• Engine: 110–140 HP</p>
+        <p>• Transmission: PowerShuttle</p>
+        <p>• Hydraulics: 550–600 kg lifting</p>
+        <p>• Brakes: Oil-immersed brakes</p>
+        <p>• Steering: Power steering</p>
+        <p>• Fuel Tank: 100–120 liter</p>
+        <p>• Tyres: Large for excellent grip</p>
+        <p>• Build: Premium strong cabin</p>
+      </div>
+      <p class="price">Price: ₹14 lakh – ₹20 lakh</p>
+    </article>
+
+    <article class="card" data-animate>
+      <div class="media">
+        <img src="/static/tractor-img/sonalika.jpeg" alt="Sonalika Tractor">
+      </div>
+      <div class="meta">
+        <h2>Sonalika WT 110RX</h2>
+        <div class="badge">110 HP</div>
+      </div>
+      <div class="desc">
+        <p>• Engine: 110 HP diesel engine</p>
+        <p>• Transmission: Multi-speed gearbox</p>
+        <p>• Hydraulics: High lifting capacity</p>
+        <p>• Brakes: Heavy-duty oil-immersed</p>
+        <p>• Steering: Power steering</p>
+        <p>• Fuel Tank: 125–130 liter</p>
+        <p>• Tyres: Large wide tyres</p>
+        <p>• Build: Strong comfortable platform</p>
+      </div>
+      <p class="price">Price: ₹12 lakh – ₹14 lakh</p>
+    </article>
+
+  </section>
+</main>
+
+<script>
+  // Logic for scroll animations
+  const cards = document.querySelectorAll('[data-animate]');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  cards.forEach(c => obs.observe(c));
+</script>
+{% endblock content %}

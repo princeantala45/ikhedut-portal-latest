@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Logout{% endblock title %}
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-indigo-100 px-4">
+
+  <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-8 text-center">
+
+    <!-- Icon -->
+    <div class="flex justify-center mb-4">
+      <div class="h-14 w-14 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-14V3" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Text -->
+    <h2 class="text-2xl font-semibold text-gray-800">
+      You’re logged out
+    </h2>
+    <p class="text-gray-600 mt-2">
+      Your session has ended safely. We hope to see you again soon.
+    </p>
+
+    <!-- Action -->
+    <div class="pt-4 flex justify-center lg:justify-center">
+      <a href="/login">
+        <button type="submit" class="cssbuttons-io-button">
+          Login Again
+          <div class="icon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                fill="currentColor"></path>
+            </svg>
+          </div>
+        </button>
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <p class="mt-6 text-xs text-gray-400">
+      Agriculture Portal • Secure Logout
+    </p>
+
+  </div>
+</div>
+{% endblock content %}

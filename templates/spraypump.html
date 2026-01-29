@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Spray Pump{% endblock title %}
+
+{% block content %}
+<div class="mb-12 text-center">
+  <h1 class="text-2xl sm:text-3xl font-semibold text-green-700 pt-8">
+    Spray Pumps
+  </h1>
+</div>
+
+<main class="max-w-7xl mx-auto px-4 py-1">
+  <div class="grid gap-6 sm:gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    
+    <div class="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
+      <div class="relative w-full bg-white">
+        <img src="/static/spray-pump/manual.avif" alt="Manual Spray Pump"
+          class="w-full h-auto block object-contain transition-transform duration-500 group-hover:scale-110">
+        <div class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          Eco-Friendly
+        </div>
+      </div>
+
+      <div class="p-5 flex-1 flex flex-col space-y-3">
+        <h3 class="text-xl font-bold text-gray-800">Manual Spray Pump</h3>
+        <div class="flex items-center space-x-2 text-green-600 font-semibold text-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+          </svg>
+          <span>Hand Operated</span>
+        </div>
+        <p class="text-gray-500 text-sm leading-relaxed">Reliable and cost-effective for small farms, nurseries, and home gardens.</p>
+
+        <div class="bg-gray-50 p-4 rounded-xl border-l-4 border-green-500 mt-auto">
+          <ul class="text-xs sm:text-sm text-gray-600 space-y-2">
+            <li class="flex items-start"><span class="mr-2">✔️</span> Zero fuel or electricity cost</li>
+            <li class="flex items-start"><span class="mr-2">✔️</span> Lightweight & ergonomic</li>
+            <li class="flex items-start"><span class="mr-2">✔️</span> Capacity: 12–16 Liters</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
+      <div class="relative w-full bg-white">
+        <img src="/static/spray-pump/automatic.webp" alt="Battery Spray Pump"
+          class="w-full h-auto block object-contain transition-transform duration-500 group-hover:scale-110">
+        <div class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          Best Seller
+        </div>
+      </div>
+
+      <div class="p-5 flex-1 flex flex-col space-y-3">
+        <h3 class="text-xl font-bold text-gray-800">Battery Spray Pump</h3>
+        <div class="flex items-center space-x-2 text-blue-600 font-semibold text-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>Rechargeable</span>
+        </div>
+        <p class="text-gray-500 text-sm leading-relaxed">Modern pumps designed for reduced labor and consistent pressure distribution.</p>
+
+        <div class="bg-gray-50 p-4 rounded-xl border-l-4 border-blue-500 mt-auto">
+          <ul class="text-xs sm:text-sm text-gray-600 space-y-2">
+            <li class="flex items-start"><span class="mr-2">✔️</span> Long-lasting 12V Battery</li>
+            <li class="flex items-start"><span class="mr-2">✔️</span> 6-8 hours continuous work</li>
+            <li class="flex items-start"><span class="mr-2">✔️</span> Capacity: 16–20 Liters</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
+      <div class="relative w-full bg-white">
+        <img src="/static/spray-pump/power.jpg" alt="Power Spray Pump"
+          class="w-[320px] h-auto block object-contain transition-transform duration-500 group-hover:scale-110">
+        <div class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          Heavy Duty
+        </div>
+      </div>
+
+      <div class="p-5 flex-1 flex flex-col space-y-3">
+        <h3 class="text-xl font-bold text-gray-800">Power Spray Pump</h3>
+        <div class="flex items-center space-x-2 text-red-600 font-semibold text-sm">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.99 7.99 0 01-2.343 5.657z"></path>
+          </svg>
+          <span>Engine Operated</span>
+        </div>
+        <p class="text-gray-500 text-sm leading-relaxed">Engine-driven pumps for rapid spraying in large-scale commercial operations.</p>
+
+        <div class="bg-gray-50 p-4 rounded-xl border-l-4 border-red-500 mt-auto">
+          <ul class="text-xs sm:text-sm text-gray-600 space-y-2">
+            <li class="flex items-start"><span class="mr-2">✔️</span> 2-Stroke/4-Stroke Engine</li>
+            <li class="flex items-start"><span class="mr-2">✔️</span> High-pressure long-range</li>
+            <li class="flex items-start"><span class="mr-2">✔️</span> Industrial grade durability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-16 mb-5 max-w-5xl mx-auto px-2">
+    <div class="mb-6">
+      <h2 class="text-xl sm:text-2xl font-bold text-gray-800 border-l-4 border-green-600 pl-4">Technical Specifications</h2>
+    </div>
+
+    <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left min-w-[600px]">
+          <thead>
+            <tr class="bg-gray-50 border-b border-gray-200">
+              <th class="px-4 py-3 text-xs font-bold uppercase text-gray-500">Specs</th>
+              <th class="px-4 py-3 text-sm font-bold text-gray-800">Manual</th>
+              <th class="px-4 py-3 text-sm font-bold text-gray-800 bg-green-50/30">Battery</th>
+              <th class="px-4 py-3 text-sm font-bold text-gray-800">Power</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr>
+              <td class="px-4 py-3 text-xs font-bold text-gray-600 bg-gray-50/50 uppercase">Pressure</td>
+              <td class="px-4 py-3 text-sm text-gray-600">0.2 - 0.3 MPa</td>
+              <td class="px-4 py-3 text-sm text-gray-900 font-medium bg-green-50/30">0.4 - 0.5 MPa</td>
+              <td class="px-4 py-3 text-sm text-gray-600">1.5 - 2.5 MPa</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 text-xs font-bold text-gray-600 bg-gray-50/50 uppercase">Capacity</td>
+              <td class="px-4 py-3 text-sm text-gray-600">12-16L</td>
+              <td class="px-4 py-3 text-sm text-gray-900 font-medium bg-green-50/30">16-20L</td>
+              <td class="px-4 py-3 text-sm text-gray-600">20-25L</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3 text-xs font-bold text-gray-600 bg-gray-50/50 uppercase">Weight</td>
+              <td class="px-4 py-3 text-sm text-gray-600">~3kg</td>
+              <td class="px-4 py-3 text-sm text-gray-900 font-medium bg-green-50/30">~6kg</td>
+              <td class="px-4 py-3 text-sm text-gray-600">~9kg</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="p-3 bg-gray-50 text-center lg:hidden border-t border-gray-100">
+        <p class="text-[10px] text-gray-400">← Swipe left to view all specs →</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<style>
+  @keyframes fade-in-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-down {
+    animation: fade-in-down 0.8s ease-out;
+  }
+</style>
+{% endblock content %}

@@ -1,0 +1,876 @@
+{% extends "base.html" %}
+{% block body %}{% endblock body %}
+{% block title %}
+Agricultureguidance
+{% endblock title %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Seasonal Crops — Winter, Summer, Kharif (Detailed)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-up {
+      animation: fadeUp 0.6s ease-out forwards;
+    }
+
+    .reveal {
+      opacity: 0;
+    }
+  </style>
+</head>   
+
+
+<body class="bg-gray-50 text-gray-800">
+  <div class="max-w-7xl mx-auto p-6">
+    <header class="mb-6">
+      <h1 id="otherpageheader" class="text-3xl font-semibold">Crops & Seasons</h1>
+      <p class="text-sm text-gray-600 mt-1">Sowing, harvest, soil, water, seed rate, fertilizer and main pests/diseases
+        for each crop.</p>
+    </header>
+    {% comment %} <!-- Season summary -->
+    <section class="mb-6 grid gap-4 sm:grid-cols-3">
+      <div class="bg-white p-4 rounded-xl shadow-sm border transition transform hover:-translate-y-1 hover:shadow-md">
+
+        <div class="flex items-center gap-3">
+          <div class="text-2xl">❄️</div>
+          <h3 class="font-medium">Winter</h3>
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Wheat, Barley, Chickpea, Pea, Fenugreek, Alfalfa, Onion, Garlic</p>
+      </div>
+      <div class="bg-white p-4 rounded-xl shadow-sm border transition transform hover:-translate-y-1 hover:shadow-md">
+
+        <div class="flex items-center gap-3">
+          <div class="text-2xl">☀️</div>
+          <h3 class="font-medium">Summer</h3>
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Groundnut, Green gram, Pigeon pea, Maize, Sesame, Sunflower, Sugarcane</p>
+      </div>
+      <div class="bg-white p-4 rounded-xl shadow-sm border transition transform hover:-translate-y-1 hover:shadow-md">
+
+        <div class="flex items-center gap-3">
+          <div class="text-2xl">🌧️</div>
+          <h3 class="font-medium">Monsoon (Kharif)</h3>
+        </div>
+        <p class="text-sm text-gray-600 mt-2">Cotton, Pigeon pea, Green gram, Urad, Maize, Pearl millet, Sorghum,
+          Soybean, Groundnut, Sesame</p>
+      </div>
+    </section>
+
+    <!-- Crops grid -->
+    <main id="cropGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <!-- Each crop card has data-name attribute (lowercase) for searching -->
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="wheat">
+        <img src="/static/agriculture-guidance-images/wheat.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌾 Wheat</h4>
+        <p class="text-sm text-gray-600 mb-3">Winter crop</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Oct - Dec</li>
+          <li><strong>Harvest:</strong> Mar - Apr</li>
+          <li><strong>Soil:</strong> Medium to loamy, good drainage</li>
+          <li><strong>Water:</strong> 4 - 6 irrigations (approx.)</li>
+          <li><strong>Seed rate:</strong> 100 - 120 kg/ha</li>
+          <li><strong>Fertilizer:</strong> Basal DAP ~100 kg/ha; top-dress urea split doses</li>
+          <li><strong>Pests/Diseases:</strong> Rust, leaf spots, aphids</li>
+          <li><strong>Yield (est):</strong> 40 - 55 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="barley">
+        <img src="/static/agriculture-guidance-images/barley.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌾 Barley</h4>
+        <p class="text-sm text-gray-600 mb-3">Suitable in winter</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Oct - Dec</li>
+          <li><strong>Harvest:</strong> Feb - Apr</li>
+          <li><strong>Soil:</strong> Medium to light loamy</li>
+          <li><strong>Water:</strong> Low to medium, 3 - 4 irrigations</li>
+          <li><strong>Seed rate:</strong> 80 - 100 kg/ha</li>
+          <li><strong>Fertilizer:</strong> Light NPK, emphasis on phosphorus</li>
+          <li><strong>Problems:</strong> Fungal diseases, stem rot</li>
+          <li><strong>Yield:</strong> 25 - 40 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="chickpea">
+        <img src="/static/agriculture-guidance-images/chickpea.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌱 Chickpea</h4>
+        <p class="text-sm text-gray-600 mb-3">Winter crop</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Oct - Nov</li>
+          <li><strong>Harvest:</strong> Feb - Mar</li>
+          <li><strong>Soil:</strong> Black soils preferred</li>
+          <li><strong>Water:</strong> 1 - 2 irrigations usually after rain</li>
+          <li><strong>Seed rate:</strong> 60 - 80 kg/ha</li>
+          <li><strong>Fertilizer:</strong> Emphasize phosphorus</li>
+          <li><strong>Pests/Diseases:</strong> Wilt, pod borer</li>
+          <li><strong>Yield:</strong> 12 - 20 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="pea">
+        <img src="/static/agriculture-guidance-images/pea.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌿 Pea</h4>
+        <p class="text-sm text-gray-600 mb-3">Winter green peas</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Oct - Nov</li>
+          <li><strong>Harvest:</strong> Jan - Feb</li>
+          <li><strong>Soil:</strong> Light to medium, low alkalinity</li>
+          <li><strong>Water:</strong> 3 - 4 irrigations</li>
+          <li><strong>Seed rate:</strong> 80 - 120 kg/ha</li>
+          <li><strong>Fertilizer:</strong> Low N, phosphorus required</li>
+          <li><strong>Pests/Diseases:</strong> Powdery mildew, aphids</li>
+          <li><strong>Yield:</strong> 30 - 40 q/ha (green pods)</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="fenugreek">
+        <img src="/static/agriculture-guidance-images/fenugreek.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌱 Fenugreek</h4>
+        <p class="text-sm text-gray-600 mb-3">Winter seed crop</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Oct - Dec</li>
+          <li><strong>Harvest:</strong> Jan - Feb</li>
+          <li><strong>Soil:</strong> Medium to light, good organic matter</li>
+          <li><strong>Water:</strong> 2 - 3 irrigations</li>
+          <li><strong>Seed rate:</strong> 20 - 25 kg/ha</li>
+          <li><strong>Fertilizer:</strong> Low N, moderate P</li>
+          <li><strong>Problems:</strong> Fungal leaf spots</li>
+          <li><strong>Yield:</strong> 6 - 12 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="onion">
+        <img src="/static/agriculture-guidance-images/onion.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🧅 Onion</h4>
+        <p class="text-sm text-gray-600 mb-3">Kharif & Winter varieties</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> (Kharif) Jul - Aug, (Winter) Oct - Dec</li>
+          <li><strong>Harvest:</strong> (Kharif) Oct - Nov, (Winter) Mar - Apr</li>
+          <li><strong>Soil:</strong> Well-drained loamy soils</li>
+          <li><strong>Water:</strong> 10 - 12 irrigations (regular)</li>
+          <li><strong>Transplant:</strong> 45 - 50 day old nursery seedlings</li>
+          <li><strong>Fertilizer:</strong> Balanced NPK + micro nutrients</li>
+          <li><strong>Pests/Diseases:</strong> Thrips, purple blotch</li>
+          <li><strong>Yield:</strong> 150 - 250 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="garlic">
+        <img src="/static/agriculture-guidance-images/garlic.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🧄 Garlic</h4>
+        <p class="text-sm text-gray-600 mb-3">Clove-based planting</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Oct - Dec</li>
+          <li><strong>Harvest:</strong> Apr</li>
+          <li><strong>Soil:</strong> Light, rich in organic matter</li>
+          <li><strong>Water:</strong> 8 - 10 irrigations</li>
+          <li><strong>Planting material:</strong> 500 - 600 kg/ha (cloves)</li>
+          <li><strong>Fertilizer:</strong> Balanced NPK + organics</li>
+          <li><strong>Pests/Diseases:</strong> Purple blotch, thrips</li>
+          <li><strong>Yield:</strong> 60 - 90 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="groundnut">
+        <img src="/static/agriculture-guidance-images/groundnut.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🥜 Groundnut (Peanut)</h4>
+        <p class="text-sm text-gray-600 mb-3">Summer crop</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Feb - Mar (region dependent)</li>
+          <li><strong>Harvest:</strong> 4 - 5 months after sowing</li>
+          <li><strong>Soil:</strong> Light sandy to medium, good drainage</li>
+          <li><strong>Water:</strong> Moderate; avoid waterlogging</li>
+          <li><strong>Seed rate:</strong> 60 - 80 kg/ha</li>
+          <li><strong>Fertilizer:</strong> Emphasize P & K</li>
+          <li><strong>Pests/Diseases:</strong> Pod borer, foliar diseases</li>
+          <li><strong>Yield:</strong> 12 - 20 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="moong">
+        <img src="/static/agriculture-guidance-images/moong.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌱 Moong (Green gram)</h4>
+        <p class="text-sm text-gray-600 mb-3">Summer / Kharif varieties</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> May - Jun (summer) / Jun - Jul (kharif)</li>
+          <li><strong>Harvest:</strong> 60 - 90 days</li>
+          <li><strong>Soil:</strong> Light, well-drained</li>
+          <li><strong>Water:</strong> Low to moderate</li>
+          <li><strong>Seed rate:</strong> 10 - 15 kg/ha</li>
+          <li><strong>Fertilizer:</strong> Light N & P</li>
+          <li><strong>Problems:</strong> Pod shattering, fungal issues</li>
+          <li><strong>Yield:</strong> 6 - 10 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="pigeon pea">
+        <img src="/static/agriculture-guidance-images/peagonpea.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌳 Pigeon pea (Tuvar)</h4>
+        <p class="text-sm text-gray-600 mb-3">Summer / Kharif depending on area</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Region-specific (often summer/kharif)</li>
+          <li><strong>Harvest:</strong> 6 - 9 months (variety dependent)</li>
+          <li><strong>Soil:</strong> Black to medium soils</li>
+          <li><strong>Water:</strong> Moderate</li>
+          <li><strong>Seed rate:</strong> 10 - 30 kg/ha</li>
+          <li><strong>Fertilizer:</strong> P & K focus</li>
+          <li><strong>Pests/Diseases:</strong> Wilt, borers</li>
+          <li><strong>Yield:</strong> 8 - 18 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="maize">
+        <img src="/static/agriculture-guidance-images/maize.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌽 Maize</h4>
+        <p class="text-sm text-gray-600 mb-3">Summer & Kharif planting</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Summer Apr - Jun; Kharif Jun - Jul</li>
+          <li><strong>Harvest:</strong> 3 - 4 months after sowing</li>
+          <li><strong>Soil:</strong> Fertile, well-drained</li>
+          <li><strong>Water:</strong> Moderate to high</li>
+          <li><strong>Seed rate:</strong> 18 - 25 kg/ha</li>
+          <li><strong>Fertilizer:</strong> High N with P-K</li>
+          <li><strong>Pests/Diseases:</strong> Stem borer, rot</li>
+          <li><strong>Yield:</strong> 30 - 80 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="sesame">
+        <img src="/static/agriculture-guidance-images/sesam.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌾 Sesame</h4>
+        <p class="text-sm text-gray-600 mb-3">Summer crop, drought tolerant</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Apr - May</li>
+          <li><strong>Harvest:</strong> 3 - 4 months</li>
+          <li><strong>Soil:</strong> Light sandy</li>
+          <li><strong>Water:</strong> Low</li>
+          <li><strong>Seed rate:</strong> 4 - 6 kg/ha</li>
+          <li><strong>Fertilizer:</strong> P & K as required</li>
+          <li><strong>Problems:</strong> Bacterial/fungal issues</li>
+          <li><strong>Yield:</strong> 4 - 8 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="sunflower">
+        <img src="/static/agriculture-guidance-images/sunflower.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌻 Sunflower</h4>
+        <p class="text-sm text-gray-600 mb-3">Feb - Mar or Jun - Jul planting</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Feb - Mar or Jun - Jul</li>
+          <li><strong>Harvest:</strong> 3 - 4 months</li>
+          <li><strong>Soil:</strong> Medium to heavy, good drainage</li>
+          <li><strong>Water:</strong> Moderate</li>
+          <li><strong>Seed rate:</strong> 6 - 8 kg/ha</li>
+          <li><strong>Fertilizer:</strong> NPK + micro elements</li>
+          <li><strong>Problems:</strong> Downy mildew, heliothis</li>
+          <li><strong>Yield:</strong> 8 - 18 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="sugarcane">
+        <img src="/static/agriculture-guidance-images/sugarcane.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌱 Sugarcane</h4>
+        <p class="text-sm text-gray-600 mb-3">Plantation crop (long duration)</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Feb - Jun or Oct - Dec depending on method</li>
+          <li><strong>Harvest:</strong> 10 - 18 months (variety)</li>
+          <li><strong>Soil:</strong> Loamy, deep soils</li>
+          <li><strong>Water:</strong> High irrigation requirement</li>
+          <li><strong>Seed rate:</strong> Setts/seed cane determined by system</li>
+          <li><strong>Fertilizer:</strong> NPK + irrigation management</li>
+          <li><strong>Problems:</strong> Ratoon issues, borers</li>
+          <li><strong>Yield:</strong> 600 - 1000 t/ha (irrigated)</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="cotton">
+        <img src="/static/agriculture-guidance-images/Cotton.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🧵 Cotton</h4>
+        <p class="text-sm text-gray-600 mb-3">Kharif main crop</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Jun - Jul (monsoon)</li>
+          <li><strong>Harvest:</strong> Nov - Dec</li>
+          <li><strong>Soil:</strong> Heavy with good organic matter</li>
+          <li><strong>Water:</strong> 1 - 2 irrigations after rains typically</li>
+          <li><strong>Seed rate:</strong> 12 - 20 kg/ha</li>
+          <li><strong>Fertilizer:</strong> Balanced NPK + micro elements</li>
+          <li><strong>Problems:</strong> Bollworm, fusarium</li>
+          <li><strong>Yield:</strong> 8 - 20 q/ha fiber (variety dependent)</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="urad">
+        <img src="/static/agriculture-guidance-images/urad.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌾 Urad (Black gram)</h4>
+        <p class="text-sm text-gray-600 mb-3">Kharif pulse</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Jun - Jul</li>
+          <li><strong>Harvest:</strong> 70 - 100 days</li>
+          <li><strong>Soil:</strong> Medium to light</li>
+          <li><strong>Water:</strong> Moderate</li>
+          <li><strong>Seed rate:</strong> 20 - 30 kg/ha</li>
+          <li><strong>Problems:</strong> Anthracnose, root rot</li>
+          <li><strong>Yield:</strong> 6 - 12 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="pearl millet">
+        <img src="/static/agriculture-guidance-images/bajra.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌾 Pearl Millet (Bajra)</h4>
+        <p class="text-sm text-gray-600 mb-3">Kharif drought-tolerant</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Jun - Jul</li>
+          <li><strong>Harvest:</strong> 2.5 - 3.5 months</li>
+          <li><strong>Soil:</strong> Light, arid soils okay</li>
+          <li><strong>Water:</strong> Low</li>
+          <li><strong>Seed rate:</strong> 6 - 8 kg/ha</li>
+          <li><strong>Problems:</strong> Downy mildew, smut</li>
+          <li><strong>Yield:</strong> 10 - 25 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="sorghum">
+        <img src="/static/agriculture-guidance-images/sorghum.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌾 Sorghum (Jowar)</h4>
+        <p class="text-sm text-gray-600 mb-3">Kharif / Summer</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Jun - Jul</li>
+          <li><strong>Harvest:</strong> 3 - 5 months</li>
+          <li><strong>Soil:</strong> Various</li>
+          <li><strong>Water:</strong> Low to moderate</li>
+          <li><strong>Seed rate:</strong> 8 - 12 kg/ha</li>
+          <li><strong>Problems:</strong> Leaf blight, stem borer</li>
+          <li><strong>Yield:</strong> 15 - 40 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="soybean">
+        <img src="/static/agriculture-guidance-images/soyaben.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌱 Soybean</h4>
+        <p class="text-sm text-gray-600 mb-3">Kharif pulse / oilseed</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Jun - Jul</li>
+          <li><strong>Harvest:</strong> 3 - 4 months</li>
+          <li><strong>Soil:</strong> Medium to heavy with organic matter</li>
+          <li><strong>Water:</strong> Moderate</li>
+          <li><strong>Seed rate:</strong> 80 - 100 kg/ha</li>
+          <li><strong>Fertilizer:</strong> Use bio-inoculants for N-fixation</li>
+          <li><strong>Problems:</strong> Stem rot, pod borer</li>
+          <li><strong>Yield:</strong> 10 - 25 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="coriander">
+        <img src="/static/agriculture-guidance-images/coriander.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌿 Coriander</h4>
+        <p class="text-sm text-gray-600 mb-3">Kharif / Winter options</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Jun - Jul (kharif) / Oct - Nov (winter)</li>
+          <li><strong>Harvest:</strong> 30 - 75 days depending on variety</li>
+          <li><strong>Soil:</strong> Medium, light loamy</li>
+          <li><strong>Water:</strong> Moderate</li>
+          <li><strong>Seed rate:</strong> 2 - 5 kg/ha</li>
+          <li><strong>Problems:</strong> Damping off, leaf spot</li>
+          <li><strong>Yield:</strong> 4 - 10 q/ha</li>
+        </ul>
+      </article>
+
+      <article
+        class="bg-white rounded-2xl pt-1 pb-10 pr-10 pl-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal"
+        data-name="mustard">
+        <img src="/static/agriculture-guidance-images/rai.jpg"
+          class="w-[200px] transition-transform duration-300 hover:scale-105" alt="">
+        <h4 class="text-lg font-semibold">🌿 Mustard / Rapeseed</h4>
+        <p class="text-sm text-gray-600 mb-3">Winter or some areas kharif</p>
+        <ul class="space-y-2 text-sm">
+          <li><strong>Sowing:</strong> Oct - Dec or Jun - Jul (in some areas)</li>
+          <li><strong>Harvest:</strong> 3 - 4 months</li>
+          <li><strong>Soil:</strong> Medium to light</li>
+          <li><strong>Water:</strong> Low to moderate</li>
+          <li><strong>Seed rate:</strong> 4 - 6 kg/ha</li>
+          <li><strong>Problems:</strong> White rust, aphids</li>
+          <li><strong>Yield:</strong> 6 - 12 q/ha</li>
+        </ul>
+      </article>
+
+    </main> {% endcomment %}
+
+
+<section class="mb-6 grid gap-4 grid-cols-1 sm:grid-cols-3">
+  <div class="bg-white p-4 rounded-xl shadow-sm border transition transform hover:-translate-y-1 hover:shadow-md">
+    <div class="flex items-center gap-3">
+      <div class="text-2xl">❄️</div>
+      <h3 class="font-medium">Winter</h3>
+    </div>
+    <p class="text-sm text-gray-600 mt-2">Wheat, Barley, Chickpea, Pea, Fenugreek, Alfalfa, Onion, Garlic</p>
+  </div>
+  <div class="bg-white p-4 rounded-xl shadow-sm border transition transform hover:-translate-y-1 hover:shadow-md">
+    <div class="flex items-center gap-3">
+      <div class="text-2xl">☀️</div>
+      <h3 class="font-medium">Summer</h3>
+    </div>
+    <p class="text-sm text-gray-600 mt-2">Groundnut, Green gram, Pigeon pea, Maize, Sesame, Sunflower, Sugarcane</p>
+  </div>
+  <div class="bg-white p-4 rounded-xl shadow-sm border transition transform hover:-translate-y-1 hover:shadow-md">
+    <div class="flex items-center gap-3">
+      <div class="text-2xl">🌧️</div>
+      <h3 class="font-medium">Monsoon (Kharif)</h3>
+    </div>
+    <p class="text-sm text-gray-600 mt-2">Cotton, Pigeon pea, Green gram, Urad, Maize, Pearl millet, Sorghum, Soybean, Groundnut, Sesame</p>
+  </div>
+</section>
+
+<main id="cropGrid" class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="wheat">
+    <img src="/static/agriculture-guidance-images/wheat.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌾 Wheat</h4>
+    <p class="text-sm text-gray-600 mb-3">Winter crop</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Oct - Dec</li>
+      <li><strong>Harvest:</strong> Mar - Apr</li>
+      <li><strong>Soil:</strong> Medium to loamy, good drainage</li>
+      <li><strong>Water:</strong> 4 - 6 irrigations (approx.)</li>
+      <li><strong>Seed rate:</strong> 100 - 120 kg/ha</li>
+      <li><strong>Fertilizer:</strong> Basal DAP ~100 kg/ha; top-dress urea split doses</li>
+      <li><strong>Pests/Diseases:</strong> Rust, leaf spots, aphids</li>
+      <li><strong>Yield (est):</strong> 40 - 55 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="barley">
+    <img src="/static/agriculture-guidance-images/barley.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌾 Barley</h4>
+    <p class="text-sm text-gray-600 mb-3">Suitable in winter</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Oct - Dec</li>
+      <li><strong>Harvest:</strong> Feb - Apr</li>
+      <li><strong>Soil:</strong> Medium to light loamy</li>
+      <li><strong>Water:</strong> Low to medium, 3 - 4 irrigations</li>
+      <li><strong>Seed rate:</strong> 80 - 100 kg/ha</li>
+      <li><strong>Fertilizer:</strong> Light NPK, emphasis on phosphorus</li>
+      <li><strong>Problems:</strong> Fungal diseases, stem rot</li>
+      <li><strong>Yield:</strong> 25 - 40 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="chickpea">
+    <img src="/static/agriculture-guidance-images/chickpea.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌱 Chickpea</h4>
+    <p class="text-sm text-gray-600 mb-3">Winter crop</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Oct - Nov</li>
+      <li><strong>Harvest:</strong> Feb - Mar</li>
+      <li><strong>Soil:</strong> Black soils preferred</li>
+      <li><strong>Water:</strong> 1 - 2 irrigations usually after rain</li>
+      <li><strong>Seed rate:</strong> 60 - 80 kg/ha</li>
+      <li><strong>Fertilizer:</strong> Emphasize phosphorus</li>
+      <li><strong>Pests/Diseases:</strong> Wilt, pod borer</li>
+      <li><strong>Yield:</strong> 12 - 20 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="pea">
+    <img src="/static/agriculture-guidance-images/pea.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌿 Pea</h4>
+    <p class="text-sm text-gray-600 mb-3">Winter green peas</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Oct - Nov</li>
+      <li><strong>Harvest:</strong> Jan - Feb</li>
+      <li><strong>Soil:</strong> Light to medium, low alkalinity</li>
+      <li><strong>Water:</strong> 3 - 4 irrigations</li>
+      <li><strong>Seed rate:</strong> 80 - 120 kg/ha</li>
+      <li><strong>Fertilizer:</strong> Low N, phosphorus required</li>
+      <li><strong>Pests/Diseases:</strong> Powdery mildew, aphids</li>
+      <li><strong>Yield:</strong> 30 - 40 q/ha (green pods)</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="fenugreek">
+    <img src="/static/agriculture-guidance-images/fenugreek.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌱 Fenugreek</h4>
+    <p class="text-sm text-gray-600 mb-3">Winter seed crop</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Oct - Dec</li>
+      <li><strong>Harvest:</strong> Jan - Feb</li>
+      <li><strong>Soil:</strong> Medium to light, good organic matter</li>
+      <li><strong>Water:</strong> 2 - 3 irrigations</li>
+      <li><strong>Seed rate:</strong> 20 - 25 kg/ha</li>
+      <li><strong>Fertilizer:</strong> Low N, moderate P</li>
+      <li><strong>Problems:</strong> Fungal leaf spots</li>
+      <li><strong>Yield:</strong> 6 - 12 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="onion">
+    <img src="/static/agriculture-guidance-images/onion.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🧅 Onion</h4>
+    <p class="text-sm text-gray-600 mb-3">Kharif & Winter varieties</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> (Kharif) Jul - Aug, (Winter) Oct - Dec</li>
+      <li><strong>Harvest:</strong> (Kharif) Oct - Nov, (Winter) Mar - Apr</li>
+      <li><strong>Soil:</strong> Well-drained loamy soils</li>
+      <li><strong>Water:</strong> 10 - 12 irrigations (regular)</li>
+      <li><strong>Transplant:</strong> 45 - 50 day old nursery seedlings</li>
+      <li><strong>Fertilizer:</strong> Balanced NPK + micro nutrients</li>
+      <li><strong>Pests/Diseases:</strong> Thrips, purple blotch</li>
+      <li><strong>Yield:</strong> 150 - 250 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="garlic">
+    <img src="/static/agriculture-guidance-images/garlic.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🧄 Garlic</h4>
+    <p class="text-sm text-gray-600 mb-3">Clove-based planting</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Oct - Dec</li>
+      <li><strong>Harvest:</strong> Apr</li>
+      <li><strong>Soil:</strong> Light, rich in organic matter</li>
+      <li><strong>Water:</strong> 8 - 10 irrigations</li>
+      <li><strong>Planting material:</strong> 500 - 600 kg/ha (cloves)</li>
+      <li><strong>Fertilizer:</strong> Balanced NPK + organics</li>
+      <li><strong>Pests/Diseases:</strong> Purple blotch, thrips</li>
+      <li><strong>Yield:</strong> 60 - 90 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="groundnut">
+    <img src="/static/agriculture-guidance-images/groundnut.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🥜 Groundnut (Peanut)</h4>
+    <p class="text-sm text-gray-600 mb-3">Summer crop</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Feb - Mar (region dependent)</li>
+      <li><strong>Harvest:</strong> 4 - 5 months after sowing</li>
+      <li><strong>Soil:</strong> Light sandy to medium, good drainage</li>
+      <li><strong>Water:</strong> Moderate; avoid waterlogging</li>
+      <li><strong>Seed rate:</strong> 60 - 80 kg/ha</li>
+      <li><strong>Fertilizer:</strong> Emphasize P & K</li>
+      <li><strong>Pests/Diseases:</strong> Pod borer, foliar diseases</li>
+      <li><strong>Yield:</strong> 12 - 20 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="moong">
+    <img src="/static/agriculture-guidance-images/moong.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌱 Moong (Green gram)</h4>
+    <p class="text-sm text-gray-600 mb-3">Summer / Kharif varieties</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> May - Jun (summer) / Jun - Jul (kharif)</li>
+      <li><strong>Harvest:</strong> 60 - 90 days</li>
+      <li><strong>Soil:</strong> Light, well-drained</li>
+      <li><strong>Water:</strong> Low to moderate</li>
+      <li><strong>Seed rate:</strong> 10 - 15 kg/ha</li>
+      <li><strong>Fertilizer:</strong> Light N & P</li>
+      <li><strong>Problems:</strong> Pod shattering, fungal issues</li>
+      <li><strong>Yield:</strong> 6 - 10 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="pigeon pea">
+    <img src="/static/agriculture-guidance-images/peagonpea.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌳 Pigeon pea (Tuvar)</h4>
+    <p class="text-sm text-gray-600 mb-3">Summer / Kharif depending on area</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Region-specific (often summer/kharif)</li>
+      <li><strong>Harvest:</strong> 6 - 9 months (variety dependent)</li>
+      <li><strong>Soil:</strong> Black to medium soils</li>
+      <li><strong>Water:</strong> Moderate</li>
+      <li><strong>Seed rate:</strong> 10 - 30 kg/ha</li>
+      <li><strong>Fertilizer:</strong> P & K focus</li>
+      <li><strong>Pests/Diseases:</strong> Wilt, borers</li>
+      <li><strong>Yield:</strong> 8 - 18 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="maize">
+    <img src="/static/agriculture-guidance-images/maize.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌽 Maize</h4>
+    <p class="text-sm text-gray-600 mb-3">Summer & Kharif planting</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Summer Apr - Jun; Kharif Jun - Jul</li>
+      <li><strong>Harvest:</strong> 3 - 4 months after sowing</li>
+      <li><strong>Soil:</strong> Fertile, well-drained</li>
+      <li><strong>Water:</strong> Moderate to high</li>
+      <li><strong>Seed rate:</strong> 18 - 25 kg/ha</li>
+      <li><strong>Fertilizer:</strong> High N with P-K</li>
+      <li><strong>Pests/Diseases:</strong> Stem borer, rot</li>
+      <li><strong>Yield:</strong> 30 - 80 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="sesame">
+    <img src="/static/agriculture-guidance-images/sesam.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌾 Sesame</h4>
+    <p class="text-sm text-gray-600 mb-3">Summer crop, drought tolerant</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Apr - May</li>
+      <li><strong>Harvest:</strong> 3 - 4 months</li>
+      <li><strong>Soil:</strong> Light sandy</li>
+      <li><strong>Water:</strong> Low</li>
+      <li><strong>Seed rate:</strong> 4 - 6 kg/ha</li>
+      <li><strong>Fertilizer:</strong> P & K as required</li>
+      <li><strong>Problems:</strong> Bacterial/fungal issues</li>
+      <li><strong>Yield:</strong> 4 - 8 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="sunflower">
+    <img src="/static/agriculture-guidance-images/sunflower.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌻 Sunflower</h4>
+    <p class="text-sm text-gray-600 mb-3">Feb - Mar or Jun - Jul planting</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Feb - Mar or Jun - Jul</li>
+      <li><strong>Harvest:</strong> 3 - 4 months</li>
+      <li><strong>Soil:</strong> Medium to heavy, good drainage</li>
+      <li><strong>Water:</strong> Moderate</li>
+      <li><strong>Seed rate:</strong> 6 - 8 kg/ha</li>
+      <li><strong>Fertilizer:</strong> NPK + micro elements</li>
+      <li><strong>Problems:</strong> Downy mildew, heliothis</li>
+      <li><strong>Yield:</strong> 8 - 18 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="sugarcane">
+    <img src="/static/agriculture-guidance-images/sugarcane.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌱 Sugarcane</h4>
+    <p class="text-sm text-gray-600 mb-3">Plantation crop (long duration)</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Feb - Jun or Oct - Dec depending on method</li>
+      <li><strong>Harvest:</strong> 10 - 18 months (variety)</li>
+      <li><strong>Soil:</strong> Loamy, deep soils</li>
+      <li><strong>Water:</strong> High irrigation requirement</li>
+      <li><strong>Seed rate:</strong> Setts/seed cane determined by system</li>
+      <li><strong>Fertilizer:</strong> NPK + irrigation management</li>
+      <li><strong>Problems:</strong> Ratoon issues, borers</li>
+      <li><strong>Yield:</strong> 600 - 1000 t/ha (irrigated)</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="cotton">
+    <img src="/static/agriculture-guidance-images/Cotton.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🧵 Cotton</h4>
+    <p class="text-sm text-gray-600 mb-3">Kharif main crop</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Jun - Jul (monsoon)</li>
+      <li><strong>Harvest:</strong> Nov - Dec</li>
+      <li><strong>Soil:</strong> Heavy with good organic matter</li>
+      <li><strong>Water:</strong> 1 - 2 irrigations after rains typically</li>
+      <li><strong>Seed rate:</strong> 12 - 20 kg/ha</li>
+      <li><strong>Fertilizer:</strong> Balanced NPK + micro elements</li>
+      <li><strong>Problems:</strong> Bollworm, fusarium</li>
+      <li><strong>Yield:</strong> 8 - 20 q/ha fiber (variety dependent)</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="urad">
+    <img src="/static/agriculture-guidance-images/urad.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌾 Urad (Black gram)</h4>
+    <p class="text-sm text-gray-600 mb-3">Kharif pulse</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Jun - Jul</li>
+      <li><strong>Harvest:</strong> 70 - 100 days</li>
+      <li><strong>Soil:</strong> Medium to light</li>
+      <li><strong>Water:</strong> Moderate</li>
+      <li><strong>Seed rate:</strong> 20 - 30 kg/ha</li>
+      <li><strong>Problems:</strong> Anthracnose, root rot</li>
+      <li><strong>Yield:</strong> 6 - 12 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="pearl millet">
+    <img src="/static/agriculture-guidance-images/bajra.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌾 Pearl Millet (Bajra)</h4>
+    <p class="text-sm text-gray-600 mb-3">Kharif drought-tolerant</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Jun - Jul</li>
+      <li><strong>Harvest:</strong> 2.5 - 3.5 months</li>
+      <li><strong>Soil:</strong> Light, arid soils okay</li>
+      <li><strong>Water:</strong> Low</li>
+      <li><strong>Seed rate:</strong> 6 - 8 kg/ha</li>
+      <li><strong>Problems:</strong> Downy mildew, smut</li>
+      <li><strong>Yield:</strong> 10 - 25 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="sorghum">
+    <img src="/static/agriculture-guidance-images/sorghum.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌾 Sorghum (Jowar)</h4>
+    <p class="text-sm text-gray-600 mb-3">Kharif / Summer</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Jun - Jul</li>
+      <li><strong>Harvest:</strong> 3 - 5 months</li>
+      <li><strong>Soil:</strong> Various</li>
+      <li><strong>Water:</strong> Low to moderate</li>
+      <li><strong>Seed rate:</strong> 8 - 12 kg/ha</li>
+      <li><strong>Problems:</strong> Leaf blight, stem borer</li>
+      <li><strong>Yield:</strong> 15 - 40 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="soybean">
+    <img src="/static/agriculture-guidance-images/soyaben.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌱 Soybean</h4>
+    <p class="text-sm text-gray-600 mb-3">Kharif pulse / oilseed</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Jun - Jul</li>
+      <li><strong>Harvest:</strong> 3 - 4 months</li>
+      <li><strong>Soil:</strong> Medium to heavy with organic matter</li>
+      <li><strong>Water:</strong> Moderate</li>
+      <li><strong>Seed rate:</strong> 80 - 100 kg/ha</li>
+      <li><strong>Fertilizer:</strong> Use bio-inoculants for N-fixation</li>
+      <li><strong>Problems:</strong> Stem rot, pod borer</li>
+      <li><strong>Yield:</strong> 10 - 25 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="coriander">
+    <img src="/static/agriculture-guidance-images/coriander.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌿 Coriander</h4>
+    <p class="text-sm text-gray-600 mb-3">Kharif / Winter options</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Jun - Jul (kharif) / Oct - Nov (winter)</li>
+      <li><strong>Harvest:</strong> 30 - 75 days depending on variety</li>
+      <li><strong>Soil:</strong> Medium, light loamy</li>
+      <li><strong>Water:</strong> Moderate</li>
+      <li><strong>Seed rate:</strong> 2 - 5 kg/ha</li>
+      <li><strong>Problems:</strong> Damping off, leaf spot</li>
+      <li><strong>Yield:</strong> 4 - 10 q/ha</li>
+    </ul>
+  </article>
+
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="mustard">
+    <img src="/static/agriculture-guidance-images/rai.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌿 Mustard / Rapeseed</h4>
+    <p class="text-sm text-gray-600 mb-3">Winter or some areas kharif</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Oct - Dec or Jun - Jul (in some areas)</li>
+      <li><strong>Harvest:</strong> 3 - 4 months</li>
+      <li><strong>Soil:</strong> Medium to light</li>
+      <li><strong>Water:</strong> Low to moderate</li>
+      <li><strong>Seed rate:</strong> 4 - 6 kg/ha</li>
+      <li><strong>Problems:</strong> White rust, aphids</li>
+      <li><strong>Yield:</strong> 6 - 12 q/ha</li>
+    </ul>
+  </article>
+  
+  <article class="bg-white rounded-2xl pt-6 pb-10 px-6 sm:px-10 shadow border transition transform hover:-translate-y-2 hover:shadow-xl reveal" data-name="sesame">
+    <img src="/static/agriculture-guidance-images/sesam.jpg" class="w-full max-w-[200px] mx-auto sm:mx-0 transition-transform duration-300 hover:scale-105 mb-4" alt="">
+    <h4 class="text-lg font-semibold">🌱 Sesame (Kharif)</h4>
+    <p class="text-sm text-gray-600 mb-3">Monsoon variety</p>
+    <ul class="space-y-2 text-sm">
+      <li><strong>Sowing:</strong> Jun - Jul</li>
+      <li><strong>Harvest:</strong> 3 - 4 months</li>
+      <li><strong>Soil:</strong> Light sandy to loamy</li>
+      <li><strong>Water:</strong> Low (rainfed)</li>
+      <li><strong>Seed rate:</strong> 4 - 5 kg/ha</li>
+      <li><strong>Problems:</strong> Leaf roller, phyllody</li>
+      <li><strong>Yield:</strong> 4 - 6 q/ha</li>
+    </ul>
+  </article>
+
+</main>
+
+  </div>
+  <script>
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-up');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    revealElements.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>
+{% endblock content %}

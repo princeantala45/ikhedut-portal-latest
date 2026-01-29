@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block title %}Signup{% endblock title %}
+
+{% block content %}
+
+{% comment %} {% for message in messages %}
+<div
+  class="alert-message fixed top-5 right-5 z-50 w-80 rounded-md border p-4 shadow-lg overflow-hidden
+    transition-all duration-300
+    {% if message.tags == 'error' %}
+      bg-red-100 text-red-700 border-red-300
+    {% else %}
+      bg-green-100 text-green-700 border-green-300
+    {% endif %}
+  "
+>
+  <p class="text-sm font-medium">{{ message }}</p>
+
+  <!-- timer line -->
+  <div class="absolute bottom-0 left-0 h-1 w-full bg-current timer-line"></div>
+</div>
+{% endfor %} {% endcomment %}
+
+
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4 p-20">
+  <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+    <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">
+      Create Account
+    </h2>
+
+    <form method="post" enctype="multipart/form-data" class="space-y-4" autocomplete="off">
+      {% csrf_token %}
+
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Username
+        </label>
+        <input
+  type="text"
+  name="username"
+  required
+  placeholder="Enter username"
+  pattern="[A-Za-z0-9]+"
+  title="Only letters and numbers are allowed"
+  oninput="this.value = this.value.replace(/[^A-Za-z0-9]/g, '')"
+  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600"
+/>
+
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Email
+        </label>
+        <input type="email" name="email" required placeholder="Enter email"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Mobile
+        </label>
+        <input type="text" name="mobile" required placeholder="Enter mobile number" maxlength="10" pattern="\d{10}"
+          title="Enter a 10 digit mobile number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,10)"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
+
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Password
+        </label>
+        <input type="password" name="password" id="password" required placeholder="Create password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
+
+      </div>
+      <ul id="passwordmsg" class="text-sm space-y-1 mt-2">
+        <li id="length" class="text-gray-500">• At least 8 characters</li>
+        <li id="uppercase" class="text-gray-500">• One uppercase letter</li>
+        <li id="lowercase" class="text-gray-500">• One lowercase letter</li>
+        <li id="number" class="text-gray-500">• One number</li>
+        <li id="special" class="text-gray-500">• One special character (@,#,$,&,...)</li>
+      </ul>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          Confirm Password
+        </label>
+        <input type="password" name="repassword" required placeholder="Confirm password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-600 mb-1">
+          User Image
+        </label>
+        <input type="file" name="image" required placeholder=""
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-600" />
+      </div>
+
+      <div class="pt-4 flex justify-center lg:justify-start">
+      <a href="/signup">
+        <button type="submit" class="cssbuttons-io-button">
+          Signup
+          <div class="icon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                fill="currentColor"></path>
+            </svg>
+          </div>
+        </button>
+      </a>
+    </div>
+
+    </form>
+
+    <p class="text-sm text-center text-gray-600 mt-6">
+      Already have an account?
+      <a href="/login" class="text-green-600 hover:text-green-700 font-medium">
+        Login
+      </a>
+    </p>
+  </div>
+</div>
+
+<script>
+  // -----------------------------------message-----------------------------
+  setTimeout(function () {
+    const alert = document.getElementById("alert-message");
+    if (alert) {
+      alert.style.display = "none";
+    }
+  }, 2500); // 3 seconds
+</script>
+{% endblock content %}

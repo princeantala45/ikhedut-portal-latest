@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% block body %}{% endblock body %}
+{% block title %}
+Tillage Equipment
+{% endblock title %}
+
+{% block content %}
+<header class="headee">
+  <h1 id="otherpageheader">Tillage Implements - Names, Uses & Approx Prices</h1>
+</header>
+
+<style>
+  /* Base Styling */
+  .wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: sans-serif;
+  }
+
+  /* Responsive Grid: 1 column mobile, 2 tablet, 3 desktop */
+  .grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  @media (min-width: 640px) {
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (min-width: 1024px) {
+    .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  /* Card Styling */
+  .card {
+    background: #fff;
+    border-radius: 1rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  /* Image Container: Removes fixed height to prevent cutting image */
+  .media {
+    width: 100%;
+    background: #fff;
+    display: block;
+    overflow: hidden;
+  }
+
+  .media img {
+    width: 100%;
+    height: auto; /* Show full height of the original image */
+    display: block;
+    object-fit: contain; /* Do not crop the product */
+    padding: 10px;
+  }
+
+  /* Content Styling */
+  .meta {
+    padding: 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f3f4f6;
+    background: #fff;
+  }
+
+  .meta h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+  }
+
+  .badge {
+    background: #eff6ff;
+    color: #2563eb;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .desc {
+    padding: 1.25rem;
+    flex-grow: 1;
+    font-size: 0.875rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .price {
+    padding: 1rem 1.25rem;
+    background: #f9fafb;
+    font-weight: 600;
+    color: #059669;
+    margin: 0;
+    font-size: 0.85rem;
+    border-top: 1px solid #e5e7eb;
+  }
+</style>
+
+<main class="wrap">
+  <section class="grid">
+
+    <article class="card" data-animate>
+      <a class="media" href="#cultivator">
+        <img src="/static/Tillage-equpment/cultiveter.jpg" alt="Cultivator">
+      </a>
+      <div class="meta">
+        <h2>Cultivator</h2>
+        <div class="badge">Secondary Tillage</div>
+      </div>
+      <p class="desc">A cultivator is primarily used to loosen and aerate the topsoil, uproot young weeds, and mix soil amendments such as fertilizer or compost into the seed zone. It is commonly used after primary tillage (ploughing) to create a fine, even seedbed suitable for sowing. Modern tractor‑mounted cultivators come with multiple tines; wider machines and stronger frames increase field coverage and durability.</p>
+      <p class="price">Approx. Price (India): ₹13,000 – ₹165,000, depending on the number of tines, working width and whether it is a simple tine cultivator or a heavy-duty multi-row model.</p>
+    </article>
+
+    <article class="card" data-animate>
+      <a class="media" href="#disc">
+        <img src="/static/Tillage-equpment/disc harrow.jpg" alt="Disc Harrow">
+      </a>
+      <div class="meta">
+        <h2>Disc Harrow</h2>
+        <div class="badge">Primary / Secondary</div>
+      </div>
+      <p class="desc">A disc harrow is built with concave steel discs arranged in gangs that cut, lift and mix surface soil and crop residues. It is effective at breaking clods after ploughing, chopping residues and producing a level, workable seedbed. Disc harrows perform well in sticky or stony soils where mouldboard ploughs struggle, and their modular construction allows for different gang angles or disc sizes to suit soil conditions.</p>
+      <p class="price">Approx. Price (India): ₹20,000 – ₹220,000 depending on working width, disc size, number of gangs and brand.</p>
+    </article>
+
+    <article class="card" data-animate>
+      <a class="media" href="#rotavator">
+        <img src="/static/Tillage-equpment/rotaweter.jpg" alt="Rotavator">
+      </a>
+      <div class="meta">
+        <h2>Rotavator (Rotary Tiller)</h2>
+        <div class="badge">Seedbed Preparation</div>
+      </div>
+      <p class="desc">A rotavator (rotary tiller) uses rotating blades mounted on a horizontal shaft to pulverize and mix the soil into a fine tilth. It is ideal for producing a smooth, uniform seedbed quickly, and mixes crop residues and manures thoroughly into the topsoil. Rotavators save time compared to multiple passes with conventional implements, but they require appropriate tractor horsepower and careful adjustment of depth to avoid over-working the soil.</p>
+      <p class="price">Approx. Price (India): ₹50,000 – ₹290,000 depending on working width, gearbox quality and manufacturer.</p>
+    </article>
+
+    <article class="card" data-animate>
+      <a class="media" href="#subsoiler">
+        <img src="/static/Tillage-equpment/subsoiler.jpg" alt="Subsoiler">
+      </a>
+      <div class="meta">
+        <h2>Subsoiler</h2>
+        <div class="badge">Deep Tillage</div>
+      </div>
+      <p class="desc">A subsoiler is designed to penetrate and fracture compacted soil layers well below the surface without inverting the topsoil. It relieves hardpans, improves drainage, root penetration and air exchange in the sub‑soil, and is used where repeated operations or traffic have caused compaction. Subsoilers vary by shank shape, depth capability and spring/ejector protection systems to prevent damage from rocks.</p>
+      <p class="price">Approx. Price (India): ₹28,000 – ₹2,00,000 depending on number of shanks, build quality and protection mechanism.</p>
+    </article>
+
+    <article class="card" data-animate>
+      <a class="media" href="#trolley">
+        <img src="/static/Tillage-equpment/troli.jpg" alt="Tractor Trolley">
+      </a>
+      <div class="meta">
+        <h2>Tractor Trolley (Trailer)</h2>
+        <div class="badge">Transport</div>
+      </div>
+      <p class="desc">A tractor trolley (or trailer) is used for transporting harvested crops, inputs like fertilizer and seed, tools and other materials on the farm. Built for heavy loads, trolleys can have tipping mechanisms for easy unloading, hydraulic lifts, and reinforced chassis for durability. Choosing the right capacity and suspension is important to match field conditions and tractor towing ability.</p>
+      <p class="price">Approx. Price (India): ₹45,000 – ₹3,50,000 depending on capacity, tipping features and build standard.</p>
+    </article>
+
+    <article class="card" data-animate>
+      <a class="media" href="#chisel">
+        <img src="/static/Tillage-equpment/chisel plow.jpg" alt="Chisel Plough">
+      </a>
+      <div class="meta">
+        <h2>Chisel Plough</h2>
+        <div class="badge">Primary Tillage</div>
+      </div>
+      <p class="desc">A chisel plough is used for primary tillage to break and loosen hard soil without inverting it. Its curved heavy-duty shanks penetrate deep to shatter compact layers, improve water infiltration and promote strong root growth. It is ideal for reclaiming hard fields and reducing plough‑pan formation.</p>
+      <p class="price">Approx. Price (India): ₹35,000 – ₹1,80,000 depending on number of shanks, frame strength and brand.</p>
+    </article>
+
+  </section>
+</main>
+
+
+<script>
+  // simple reveal on scroll
+  const cards = document.querySelectorAll('[data-animate]');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  cards.forEach(c => obs.observe(c));
+</script>
+{% endblock content %}

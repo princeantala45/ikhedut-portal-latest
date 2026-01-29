@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+{% block title %}Post-advertisement{% endblock title %}
+
+{% block content %}
+
+<!-- Alert -->
+{% comment %} {% for message in messages %}
+<div class="alert-message fixed top-5 right-5 z-50 w-80 rounded-md border p-4 shadow-lg overflow-hidden
+    transition-all duration-300
+    {% if message.tags == 'error' %}
+      bg-red-100 text-red-700 border-red-300
+    {% else %}
+      bg-green-100 text-green-700 border-green-300
+    {% endif %}
+  ">
+    <p class="text-sm font-medium">{{ message }}</p>
+
+    <!-- timer line -->
+    <div class="absolute bottom-0 left-0 h-1 w-full bg-current timer-line"></div>
+</div>
+{% endfor %} {% endcomment %}
+
+
+
+<div class="max-w-4xl mx-auto px-4 sm:px-6">
+
+
+    <!-- FRAME -->
+    <div class="form-frame animate-frame my-8 sm:my-12 px-4 sm:px-8">
+
+
+        <div class="mb-6 animate-fade-up">
+            <h1 id="otherpageheader" class="text-2xl font-bold text-gray-900">
+                Post Advertisement
+            </h1>
+            <p class="text-sm text-gray-500 mt-0.5">
+                Add product details below
+            </p>
+        </div>
+
+        <!-- Form -->
+        <form id="adForm" method="post" enctype="multipart/form-data" class="space-y-6">
+            {% csrf_token %}
+
+            <!-- Contact Section -->
+            <section class="animate-fade-up delay-1">
+                <h2 class="text-base font-semibold mb-3">
+                    Contact Information
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" name="fullname" required placeholder="Full Name"
+                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+
+
+                    <input type="text" name="mobile" required placeholder="Mobile Number" maxlength="10"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+
+                        <input type="text" name="state" required placeholder="State"
+                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+
+                    <input type="text" name="city" required placeholder="City"
+                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+
+                </div>
+            </section>
+
+            <!-- Product Section -->
+            <section class="animate-fade-up delay-2">
+                <h2 class="text-base font-semibold mb-3">
+                    Product Details
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" name="productname" required placeholder="Product Name"
+                        oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')"
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+
+                    <input type="text" name="price" required maxlength="6" placeholder="Price"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500">
+
+
+                    <textarea name="description" rows="3" required placeholder="Description"
+                        class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 md:col-span-2"></textarea>
+
+                    <input type="file" name="image" accept="image/*" required
+                        class="file-animated w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 md:col-span-2">
+                </div>
+            </section>
+
+            <!-- Submit -->
+            <div class="flex justify-center lg:justify-start">
+                <button type="submit" class="cssbuttons-io-button">
+                    Submit Advertisement
+                    <div class="icon">
+                        <svg height="24" width="24" viewBox="0 0 24 24">
+                            <path d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                fill="currentColor"></path>
+                        </svg>
+                    </div>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Styles -->
+<style>
+    /* Frame */
+    .form-frame {
+        background: #ffffff;
+        padding: 24px;
+        border-radius: 12px;
+        border: 1px solid #e5e7eb;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Animations (unchanged) */
+    @keyframes frameIn {
+        from {
+            opacity: 0;
+            transform: scale(0.98);
+        }
+
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    .animate-frame {
+        animation: frameIn 0.35s ease-out forwards;
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(12px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-up {
+        animation: fadeUp 0.45s ease-out both;
+    }
+
+    .delay-1 {
+        animation-delay: 0.08s;
+    }
+
+    .delay-2 {
+        animation-delay: 0.16s;
+    }
+
+    .delay-3 {
+        animation-delay: 0.24s;
+    }
+
+    @keyframes alertSlide {
+        from {
+            opacity: 0;
+            transform: translateY(-8px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-alert {
+        animation: alertSlide 0.3s ease-out;
+    }
+
+    /* Inputs */
+    .input-animated {
+        width: 100%;
+        padding: 6px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .input-animated:focus {
+        outline: none;
+        border-color: #2563eb;
+        box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+    }
+
+    /* File */
+    .file-animated {
+        padding: 8px 10px;
+        border: 1px dashed #c7cdd4;
+        border-radius: 6px;
+        background: #fafafa;
+    }
+
+    /* Button */
+    .submit-animated {
+        width: 100%;
+        border-radius: 8px;
+        background: #2563eb;
+        color: white;
+        font-weight: 600;
+        transition: background 0.15s ease, transform 0.1s ease;
+    }
+
+    .submit-animated:hover {
+        background: #1e4fd6;
+    }
+
+    .submit-animated:active {
+        transform: scale(0.98);
+    }
+</style> 
+<script>
+/* CSRF helper */
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + '=')) {
+                cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+/* Form submit handler */
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("adForm");
+    if (!form) return;
+
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const submitBtn = form.querySelector("button[type='submit']");
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Submitting...";
+
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch("/api/advertisement/", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                body: formData
+            });
+
+            let data = null;
+            try {
+                data = await response.json();
+            } catch (err) {
+                // response was not JSON
+            }
+
+            if (response.ok) {
+                alert(
+                    data?.message ||
+                    "Advertisement submitted successfully. Waiting for admin approval. check status on user profile"
+                );
+                form.reset();
+            } else {
+                console.error("API error:", response.status, data);
+                alert(
+                    data?.error ||
+                    data?.detail ||
+                    "Submission failed. Please check your inputs and try again."
+                );
+            }
+        } catch (error) {
+            console.error("Network error:", error);
+            alert("Network error. Please check your connection and try again.");
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit Advertisement";
+        }
+    });
+});
+</script>
+
+
+{% endblock content %}

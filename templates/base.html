@@ -1,0 +1,565 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/tillage.css'%}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="shortcut icon" href="{% static 'img/favicon.png'%}" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>{% block title %}{% endblock title %} | ikhedut Portal</title>
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-title {
+            cursor: pointer;
+
+                {
+                % comment %
+            }
+
+            padding: 0px 12px;
+
+                {
+                % endcomment %
+            }
+
+            display: inline-block;
+        }
+
+        c .dropdown-menu {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 106%;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            padding: 5px;
+            min-width: 200px;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: green;
+            color: white;
+        }
+
+        .dropdown:hover #errow {
+            transform: rotate(180deg);
+            transition: 1s;
+        }
+
+        #errow {
+            display: inline-block;
+            transition: transform 1s ease;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .follow {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            background-color: #efefef;
+            padding-top: 26px;
+            padding-bottom: 26px;
+            color: #716f6f;
+        }
+
+        .follow-box-2 {
+            display: flex;
+            gap: 20px;
+            font-size: 18px;
+        }
+
+        #facebook {
+            color: #0051ff;
+        }
+
+        #instagram {
+            color: #db3074;
+        }
+
+        #twitter {
+            color: #1da1f2;
+        }
+
+        #linkedin {
+            color: #0a66c2;
+        }
+
+        .footer {
+            display: grid;
+            grid-template-columns: 18% 17% 24% 25%;
+            justify-content: center;
+            align-items: center;
+            text-align: justify;
+            gap: 50px;
+            background-color: rgba(221, 221, 221, 0.867);
+            padding-top: 60px;
+            padding-left: 80px;
+            padding-right: 80px;
+        }
+
+        .footer-infos {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .footer-contact-infos {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer h3 {
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .footer-box-1 {
+            /* border: 2px solid; */
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .gallery-img {
+            display: grid;
+            grid-template-columns: 30% 30% 30%;
+            gap: 5px;
+        }
+
+        .gallery-img img {
+            width: 140px;
+            height: 60px;
+            border: 5px solid white;
+        }
+
+        #contact {
+            padding-left: 15px;
+        }
+
+        #links {
+            padding-left: 10px;
+        }
+
+        .right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 15px;
+        }
+
+        h1::after {
+            height: 0px;
+        }
+
+        @media screen and (min-width: 768px) and (max-width: 1023px) {
+            .footer {
+                grid-template-columns: 45% 45%;
+            }
+
+            .footer-box-1 {
+                height: auto;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .footer {
+                grid-template-columns: 90%;
+                padding-bottom: 20px;
+                padding-left: 0px;
+                padding-right: 0px;
+            }
+
+            .footer-box-1 {
+                height: auto;
+            }
+
+            .follow {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                text-align: justify;
+            }
+
+            #footer-text {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    {% for message in messages %}
+    <div class="alert-message fixed top-5 right-5 z-50 w-80 rounded-md border p-4 shadow-lg overflow-hidden
+  {% if message.tags == 'error' %}
+    bg-red-100 text-red-700 border-red-300
+  {% else %}
+    bg-green-100 text-green-700 border-green-300
+  {% endif %}
+">
+        <p class="text-sm font-medium">{{ message }}</p>
+        <div class="absolute bottom-0 left-0 h-1 w-full bg-current timer-line"></div>
+    </div>
+    {% endfor %}
+
+    <!-- Page Loader -->
+    <div id="page-loader">
+        <img src="{% static 'img/leaf-loader-CVgu4tmg.gif'%}" style="border-radius: 50%; width: 150px;" alt="">
+        <p style="color: white;">Loading...</p>
+    </div>
+
+    {% block header %}
+
+    <div class="up-errow">
+        <i class="fa-solid fa-angles-up" style="font-size: 20px;"></i>
+    </div>
+    <header class="w-full">
+        <div style="padding:10px;"
+            class="max-w-7xl mx-auto flex flex-col gap-2 md:grid md:grid-cols-3 md:items-center lg:flex lg:flex-row">
+
+            <!-- Logo -->
+            <div class="flex justify-center md:justify-start">
+                <a href="/">
+                    <img src="{% static 'img/header.png' %}" alt="Logo" class="w-[220px] md:w-[250px]">
+                </a>
+            </div>
+
+            <!-- Department Name -->
+            <div class="flex-1 text-green-700 text-center md:text-left">
+                <p class="text-base md:text-lg font-semibold">
+                    Agriculture, Farmers Welfare & Co-Operation Department
+                <div id="clock" class="text-red-500"></div>
+                </p>
+            </div>
+
+            <div id="google_translate_element" class="flex justify-center md:justify-end">
+            </div>
+
+
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement(
+                        { pageLanguage: 'en', includedLanguages: 'gu,hi' },
+                        'google_translate_element'
+                    );
+                }
+            </script>
+
+            <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+            <!-- Buttons -->
+            <div class="flex flex-col md:flex-row gap-2 justify-center items-center md:col-span-3 lg:col-span-1">
+
+                <a href="/login" class="w-fit">
+                    <button class="cssbuttons-io-button">
+                        User Login
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </button>
+                </a>
+
+                <a href="/admin" class="w-fit">
+                    <button class="cssbuttons-io-button">
+                        Admin Login
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                                    fill="currentColor"></path>
+                            </svg>
+                        </div>
+                    </button>
+                </a>
+
+            </div>
+        </div>
+
+        {% comment %} <div class="second-header">
+            <a href="/">Home</a>
+            <a href="/agricultureguidance">Agriculture Guidance</a>
+            <a href="/sellcrops">Sell Your Crops</a>
+            <a href="/buycrops">Buy Crops</a>
+
+            <div class="dropdown">
+                <p class="dropdown-title">Advertising <i class="fa-solid fa-chevron-down" id="errow"></i></p>
+                <div class="dropdown-menu">
+                    <a href="/postadvertisement">Post advertisement</a>
+                    <a href="/postedadvertisement">Posted advertisement</a>
+                </div>
+            </div>
+
+            <div>
+                {% if request.user.is_authenticated %}
+                <div class="flex items-center gap-4">
+                    <a href="/userprofile">
+                        <span class="text-sm text-blue-200">
+                            Welcome, <span class="font-semibold">{{ request.user.username }}</span>
+                        </span>
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div> {% endcomment %}
+
+
+        <!-- Include this script tag or install `@tailwindplus/elements` via npm: -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
+        <nav style="background-color: green;"
+            class="relative dark:bg-white-700 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10">
+            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                <div class="relative flex h-16 items-center justify-between">
+                    <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                        <!-- Mobile menu button-->
+                        <button type="button" command="--toggle" commandfor="mobile-menu"
+                            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
+                            <span class="absolute -inset-0.5"></span>
+                            <span class="sr-only">Open main menu</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                data-slot="icon" aria-hidden="true" class="size-6 in-aria-expanded:hidden">
+                                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                data-slot="icon" aria-hidden="true" class="size-6 not-in-aria-expanded:hidden">
+                                <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                        <div class="flex shrink-0 items-center">
+                            <a href="/">
+                                <img src="{% static 'img/favicon.png' %}" class="h-8 w-auto" />
+                            </a>
+                        </div>
+                        <div class="hidden sm:ml-6 sm:block">
+                            <div class="flex space-x-4">
+                                <!-- Current: "bg-gray-900 dark:bg-g ray-950/50 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
+                                {% comment %} <a href="/" aria-current="page"
+                                    class="rounded-md bg-gray-900 px-1 py-1 text-base font-xl text-white dark:bg-gray-950/50">Home</a>
+                                {% endcomment %}
+                                <a href="/"
+                                    class="rounded-md px-1 py-1 text-base font-xl text-white hover:bg-white/5 hover:text-white">Home</a>
+                                <a href="/agricultureguidance"
+                                    class="rounded-md px-1 py-1 text-base font-xl text-white hover:bg-white/5 hover:text-white">Agriculture
+                                    Guidance</a>
+                                <a href="/sellcrops"
+                                    class="rounded-md px-1 py-1 text-base font-xl text-white hover:bg-white/5 hover:text-white">Sell
+                                    Your Crops</a>
+                                <a href="/buycrops"
+                                    class="rounded-md px-1 py-1 text-base font-xl text-white hover:bg-white/5 hover:text-white">Buy
+                                    Crops</a>
+
+                                <a href="/postadvertisement"
+                                    class="rounded-md px-1 py-1 text-base font-xl text-white hover:bg-white/5 hover:text-white">Post
+                                    Advertisement</a>
+                                <a href="/postedadvertisement"
+                                    class="rounded-md px-1 py-1 text-base font-xl text-white hover:bg-white/5 hover:text-white">Posted
+                                    Advertisement</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                        {% comment %} <button type="button"
+                            class="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500 dark:hover:text-white">
+                            <span class="absolute -inset-1.5"></span>
+                            <span class="sr-only">View notifications</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                data-slot="icon" aria-hidden="true" class="size-6">
+                                <path
+                                    d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button> {% endcomment %}
+
+                        <!-- Profile dropdown -->
+                        <el-dropdown class="relative ml-3">
+                            <button
+                                class="pr-5 relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                <span class="absolute -inset-1.5"></span>
+                                <span class="sr-only">Open user menu</span>
+                                {% if user.is_authenticated %}
+                                <div class="flex items-center gap-2">
+                                    <img src="{{ user.signup.image.url }}" alt="User Image"
+                                        class="w-10 h-10 rounded-full object-cover border" />
+                                </div>
+                                {% endif %}
+
+                            </button>
+
+                            <el-menu anchor="bottom end" style="background-color: green;" popover
+                                class="w-48 origin-top-right rounded-md py-1 shadow-lg outline outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in dark:bg-gray-800 dark:shadow-none dark:-outline-offset-1 dark:outline-white/10">
+                                <a href="/userprofile"
+                                    class="block px-4 py-2 text-sm text-white focus:bg-gray-100 focus:outline-hidden dark:text-gray-300 dark:focus:bg-white/5">
+                                    Your Profile
+                                </a>
+                                <a href="/cart"
+                                    class="block px-4 py-2 text-sm text-white focus:bg-gray-100 focus:outline-hidden dark:text-gray-300 dark:focus:bg-white/5">
+                                    Cart
+                                </a>
+
+                                <form method="post" action="/logout/">
+                                    {% csrf_token %}
+                                    <button type="submit" class="block w-full px-4 py-2 text-sm text-white text-left
+           focus:bg-gray-100 focus:outline-hidden dark:text-gray-300 dark:focus:bg-white/5">
+                                        Sign out
+                                    </button>
+                                </form>
+
+
+                            </el-menu>
+                        </el-dropdown>
+                    </div>
+                </div>
+            </div>
+
+            <el-disclosure id="mobile-menu" hidden class="block sm:hidden">
+                <div class="space-y-1 px-2 pt-2 pb-3">
+                    <!-- Current: "bg-gray-900 dark:bg-gray-950/50 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
+                    <a href="/" aria-current="page"
+                        class="block rounded-md bg-gray-900 px-1 py-1 text-babase font-xlum text-white dark:bg-gray-950/50">Home</a>
+                    <a href="/agricultureguidance"
+                        class="block rounded-md px-1 py-1 text-babase font-xlum text-gray-300 hover:bg-white/5 hover:text-white">Agriculture
+                        Guidance</a>
+                    <a href="/sellcrops"
+                        class="block rounded-md px-1 py-1 text-babase font-xlum text-gray-300 hover:bg-white/5 hover:text-white">Sell
+                        Your Crops</a>
+                    <a href="/buycrops"
+                        class="block rounded-md px-1 py-1 text-babase font-xlum text-gray-300 hover:bg-white/5 hover:text-white">Buy
+                        Crops</a>
+                    <a href="/postadvertisement"
+                        class="block rounded-md px-1 py-1 text-babase font-xlum text-gray-300 hover:bg-white/5 hover:text-white">Post
+                        Advertisement</a>
+                    <a href="/postedadvertisement"
+                        class="block rounded-md px-1 py-1 text-babase font-xlum text-gray-300 hover:bg-white/5 hover:text-white">Posted
+                        Advertisement</a>
+                </div>
+            </el-disclosure>
+        </nav>
+        </div>
+
+    </header>
+    {% endblock header %}
+
+    {% block content %}
+    {% endblock content %}
+
+    {% block footer %}
+    <footer>
+        <div class="follow">
+            <div class="follow-box-1">
+                <p id="footer-text">Get connected with us on social networks:</p>
+            </div>
+            <div class="follow-box-2">
+                <i id="instagram" class="fa-brands fa-instagram"></i>
+                <i id="facebook" class="fa-brands fa-facebook-f"></i>
+                <i id="twitter" class="fa-brands fa-twitter"></i>
+                <i id="linkedin" class="fa-brands fa-linkedin-in"></i>
+            </div>
+        </div>
+        <hr>
+        <div class="footer">
+            <div class="footer-box-1">
+                <h3>ikhedut Portal</h3>
+                <p id="footer-text">A reliable platform that helps farmers with quality inputs, useful information and
+                    expert support.
+                    Our
+                    goal is to make farming easier, sustainable and more productive for every farmer.</p>
+            </div>
+            <div class="footer-box-1" id="links">
+                <h3>QUICK LINKS</h3>
+                <div class="footer-contact-infos">
+                    <a id="footer-text" href="/contact"> > Contact Us</a>
+                    <a id="footer-text" href="/agricultureguidance"> > Agricultureguidance</a>
+                    <a id="footer-text" href="/buycrops"> > Buy Crops</a>
+                    <a id="footer-text" href="/postedadvertisement"> > Advertisement</a>
+                </div>
+            </div>
+            <div class="footer-box-1" id="contact">
+                <h3>CONTACT</h3>
+                <div class="footer-infos">
+                    <div style="display: flex; gap: 4px;">
+                        <i class="fa-solid fa-house"></i>
+                        <p id="footer-text">Kharavad Plote</p>
+                    </div>
+                    <div style="display: flex; gap: 4px;">
+                        <i class="fa-solid fa-envelope"></i>
+                        <p id="footer-text">infoikhedutportal@gmail.com</p>
+                    </div>
+                    <div style="display: flex; gap: 4px;">
+                        <i class="fa-solid fa-phone"></i>
+                        <p id="footer-text">
+                            +91 7990972794
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-box-1">
+                <h3>GALLERY</h3>
+                <div class="gallery-img">
+                    <img src="{% static 'footer-galery-img/1.jpg' %}" alt="">
+                    <img src="{% static 'footer-galery-img/2.jpeg' %}" alt="">
+                    <img src="{% static 'footer-galery-img/3.jpg' %}" alt="">
+                    <img src="{% static 'footer-galery-img/4.webp' %}" alt="">
+                    <img src="{% static 'footer-galery-img/5.jpg' %}" alt="">
+                    <img src="{% static 'footer-galery-img/6.avif' %}" alt="">
+
+                </div>
+            </div>
+        </div>
+        <div class="right bg-gray-300 px-4 py-3 text-center sm:flex sm:items-center sm:justify-between">
+            <a href="/" class="text-green-600 font-medium">
+                © ikhedut-Portal
+            </a>
+
+            <p class="mt-2 text-sm text-gray-700 sm:mt-0">
+                All Rights Reserved | Designed and Developed by PrinceAntala
+            </p>
+        </div>
+
+
+    </footer>
+    {% endblock footer %}
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
