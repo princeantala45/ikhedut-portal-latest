@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 admin.site.site_header = "ikhedut Portal Admin Panel"
 admin.site.site_title = "ikhedut Portal"
-admin.site.index_title = "Welcome to ikhedut Portal"
+admin.site.index_title = "Welcome to ikhedut Portal Admin"
 
 urlpatterns = [    
     path('admin/', admin.site.urls),

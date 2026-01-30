@@ -10,25 +10,32 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
-from datetime import timedelta
-
-import os
 from pathlib import Path
 from datetime import timedelta
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get("SECRET_KEY", "unsafe-dev-key")
 
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
-DEBUG = False
+# SECURITY WARNING: keep the secret key used in production secret!
+import os
+
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY",
+    "1b604c7567ae32d0bf02685eb94bb43e"
+)
+
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    "ikhedut-portal-latest.onrender.com",
+    "ikhedut-portal.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
-   
+
 INSTALLED_APPS = [
     "jazzmin",
     # 'unfold',
@@ -44,7 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    # "whitenoise.middleware.WhiteNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -82,6 +89,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -115,19 +123,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+STATIC_URL = '/static/'
 
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# Where collectstatic puts files (production)
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Where your source static files live (development)
 STATICFILES_DIRS = [
-    BASE_DIR / "ikhedut_portal" / "static",
+    BASE_DIR / 'static',
 ]
-
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # ------------- this is only for django admin panel UI change --------------------
 
@@ -167,6 +175,7 @@ SIMPLE_JWT = {
 }
 
 
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
@@ -174,30 +183,11 @@ EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER=os.environ.get("EMAIL_HOST_USER")
-# EMAIL_HOST_PASSWORD = "fnrz lzsc tqwm xtdl"
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
+EMAIL_HOST_USER = "infoikhedutportal@gmail.com"
+EMAIL_HOST_PASSWORD = "fnrz lzsc tqwm xtdl"
+
 DEFAULT_FROM_EMAIL = "Ikhedut Portal Support <princeantala7@gmail.com>"
- 
+
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/userprofile/"
 LOGOUT_REDIRECT_URL = "/login/"
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://ikhedut-portal-latest.onrender.com",
-]
-
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-        },
-    },
-    "root": {
-        "handlers": ["console"],
-        "level": "ERROR",
-    },
-}
