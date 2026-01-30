@@ -138,7 +138,7 @@ def buy_crops_api(request):
 
     return Response(list(crops.values()))
 
-   
+@login_required   
 def buycrops(request):
     return render(request, "buycrops.html")
 
