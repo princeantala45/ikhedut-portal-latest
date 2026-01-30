@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Spray Pump{% endblock title %}
 
 {% block content %}
@@ -14,7 +14,7 @@
     
     <div class="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
       <div class="relative w-full bg-white">
-        <img src="/static/spray-pump/manual.avif" alt="Manual Spray Pump"
+        <img src="{% static 'spray-pump/manual.avif'%}" alt="Manual Spray Pump"
           class="w-full h-auto block object-contain transition-transform duration-500 group-hover:scale-110">
         <div class="absolute top-4 left-4 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
           Eco-Friendly
@@ -43,7 +43,7 @@
 
     <div class="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
       <div class="relative w-full bg-white">
-        <img src="/static/spray-pump/automatic.webp" alt="Battery Spray Pump"
+        <img src="{% static 'spray-pump/automatic.webp'%}" alt="Battery Spray Pump"
           class="w-full h-auto block object-contain transition-transform duration-500 group-hover:scale-110">
         <div class="absolute top-4 left-4 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
           Best Seller
@@ -72,7 +72,7 @@
 
     <div class="group relative bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col overflow-hidden">
       <div class="relative w-full bg-white">
-        <img src="/static/spray-pump/power.jpg" alt="Power Spray Pump"
+        <img src="{% static 'spray-pump/power.jpg'%}" alt="Power Spray Pump"
           class="w-[320px] h-auto block object-contain transition-transform duration-500 group-hover:scale-110">
         <div class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
           Heavy Duty

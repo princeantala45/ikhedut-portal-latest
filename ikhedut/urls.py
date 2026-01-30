@@ -35,6 +35,7 @@ urlpatterns = [
     path("ox/", views.ox),
     path("agrochemicals/", views.agrochemicals),
     path("fertilizer/", views.fertilizer),
+    path("spraypump/", views.spraypump),
     path("contact/", views.contact),
 
     path("login/", views.user_login),

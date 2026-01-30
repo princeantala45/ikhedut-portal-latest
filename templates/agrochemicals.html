@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block body %}{% endblock body %}
 {% block title %}
 Agrochemicals
@@ -11,7 +12,7 @@ Agrochemicals
     <!-- Card -->
     <article class="bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col">
       <div class="h-52 bg-gray-100 p-2">
-        <img src="{% static/agrochemicals/bactariya-nasak.jpg'%}" alt="Bactericide"
+        <img src="{% static 'agrochemicals/bactariya-nasak.jpg'%}" alt="Bactericide"
           class="w-full rounded-2xl h-full object-cover">
       </div>
 
