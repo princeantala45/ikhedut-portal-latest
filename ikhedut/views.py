@@ -87,9 +87,9 @@ from django.contrib import messages
 from .models import CropSale
 
 @login_required(login_url="/login")
-def delete_crop(request, crop_id):
+def delete_crop(request, id):
     # Only allow the owner of the crop to delete it
-    crop = get_object_or_404(CropSale, id=crop_id, seller=request.user)
+    crop = get_object_or_404(CropSale, id=id, seller=request.user)
     
     if request.method == "POST":
         # Cleanup the image from media folder if it exists
@@ -383,10 +383,10 @@ class AdvertisementViewSet(viewsets.ModelViewSet):
 
 @login_required
 @require_POST
-def delete_advertisement(request, pk):
+def delete_advertisement(request, id):
     ad = get_object_or_404(
-        Ad,          # ⚠️ use YOUR model name here
-        pk=pk,
+        Ad,
+        id=id,
         user=request.user
     )
     ad.delete()

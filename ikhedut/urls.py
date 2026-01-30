@@ -37,24 +37,32 @@ urlpatterns = [
     path("fertilizer/", views.fertilizer),
     path("spraypump/", views.spraypump),
     path("contact/", views.contact),
+    
 
     path("login/", views.user_login),
     path("logout/", views.logout),
-    path("userprofile/", views.userprofile),
+    path("userprofile/", views.userprofile, name="userprofile"),
 
     path("cart/", views.cart),
     path("cart/expire/<int:item_id>/", views.expire_cart_item),
+    path("delete-crop/<int:id>/", views.delete_crop, name="delete_crop"),
     path("remove-cart/<int:item_id>/", views.remove_from_cart),
 
     path("postadvertisement/", views.postadvertisement),
     path("postedadvertisement/", views.postedadvertisement),
-    path("advertisement/delete/<int:pk>/", views.delete_advertisement),
+    path(
+    "delete-advertisement/<int:id>/",
+    views.delete_advertisement,
+    name="delete_advertisement"
+),
+
 
     path("checkout/", views.checkout),
     path("order_success/", views.order_success),
     path("order/cancel/<int:order_id>/", views.cancel_order),
     path("order/request-cancel/<int:order_id>/", views.request_cancel_order),
-    path("delete-crop/<int:crop_id>/", views.delete_crop),
+    path("delete-crop/<int:id>/", views.delete_crop, name="delete_crop"),
+
 
     path("accounts/", include("django.contrib.auth.urls")),
 ]
