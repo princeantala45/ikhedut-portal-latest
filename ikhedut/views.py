@@ -157,47 +157,47 @@ def agrochemicals(request):
 def fertilizer(request):
     return render(request,"fertilizer.html")
 
-# def signup(request):
-#     if request.method == "POST":
-#         username = request.POST.get("username", "").strip()
-#         email = request.POST.get("email", "").strip()
-#         mobile = request.POST.get("mobile", "").strip()
-#         password = request.POST.get("password")
-#         repassword = request.POST.get("repassword")
-#         image=request.FILES.get("image")
+def signup(request):
+    if request.method == "POST":
+        username = request.POST.get("username", "").strip()
+        email = request.POST.get("email", "").strip()
+        mobile = request.POST.get("mobile", "").strip()
+        password = request.POST.get("password")
+        repassword = request.POST.get("repassword")
+        image=request.FILES.get("image")
 
-#         if not all([username, email, mobile, password, repassword]):
-#             messages.error(request, "All fields are required")
-#             return render(request, "signup.html")
+        if not all([username, email, mobile, password, repassword]):
+            messages.error(request, "All fields are required")
+            return render(request, "signup.html")
 
-#         if password != repassword:
-#             messages.error(request, "Passwords do not match")
-#             return render(request, "signup.html")
+        if password != repassword:
+            messages.error(request, "Passwords do not match")
+            return render(request, "signup.html")
 
-#         if User.objects.filter(username=username).exists():
-#             messages.error(request, "Username already exists")
-#             return render(request, "signup.html")
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Username already exists")
+            return render(request, "signup.html")
         
-#         if User.objects.filter(email=email).exists():
-#             messages.error(request, "Email already exists")
-#             return render(request, "signup.html")
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email already exists")
+            return render(request, "signup.html")
 
-#         user = User.objects.create_user(
-#             username=username,
-#             email=email,
-#             password=password
-#         )
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
 
-#         Signup.objects.create(
-#             user=user,
-#             mobile=mobile,
-#             image=image
-#         )
+        Signup.objects.create(
+            user=user,
+            mobile=mobile,
+            image=image
+        )
 
-#         messages.success(request, "Registration successful")
-#         return redirect("login")
+        messages.success(request, "Registration successful")
+        return redirect("login")
 
-#     return render(request, "signup.html")
+    return render(request, "signup.html")
 
 
 @api_view(["POST"])

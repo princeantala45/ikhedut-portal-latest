@@ -31,6 +31,7 @@ urlpatterns = [
     path("sellcrops/", views.sellcrops_page),
     path("buycrops/", views.buycrops),
     path("tractor/", views.tractor),
+    path("signup/", views.signup),
     path("tillage/", views.tillage),
     path("ox/", views.ox),
     path("agrochemicals/", views.agrochemicals),
