@@ -13,8 +13,7 @@ env/
 # Environment variables
 .env
 
-# Static files (generated)
-static/
+# Collected static files (DO NOT COMMIT)
 staticfiles/
 
 # Media uploads

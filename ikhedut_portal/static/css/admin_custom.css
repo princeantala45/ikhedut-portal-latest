@@ -1,0 +1,16 @@
+/* Prevent horizontal scroll on login page */
+body.login {
+    overflow-x: hidden;
+}
+
+/* Limit logo size */
+.login-logo img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Optional: center logo properly */
+.login-logo {
+    display: flex;
+    justify-content: center;
+}
