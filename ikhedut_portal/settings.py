@@ -186,7 +186,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "infoikhedutportal@gmail.com"
 EMAIL_HOST_PASSWORD = "fnrz lzsc tqwm xtdl"
 
-DEFAULT_FROM_EMAIL = "Ikhedut Portal Support <princeantala7@gmail.com>"
+DEFAULT_FROM_EMAIL = "Ikhedut Portal Support <infoikhedutportal@gmail.com>"
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/userprofile/"
