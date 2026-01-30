@@ -62,7 +62,6 @@ urlpatterns = [
     path("order_success/", views.order_success),
     path("order/cancel/<int:order_id>/", views.cancel_order),
     path("order/request-cancel/<int:order_id>/", views.request_cancel_order),
-    path("delete-crop/<int:id>/", views.delete_crop, name="delete_crop"),
 
 
     path("accounts/", include("django.contrib.auth.urls")),
