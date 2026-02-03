@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+     "django.contrib.sites", 
     'django.contrib.staticfiles',
 ]
+SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -170,6 +172,8 @@ EMAIL_HOST_PASSWORDD = os.environ.get("EMAIL_HOST_PASSWORD")
 
 DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 
+SITE_NAME = "Ikhedut Portal"
+SITE_DOMAIN = "ikhedut-portal-latest.onrender.com"
 
 
 CSRF_TRUSTED_ORIGINS = [
