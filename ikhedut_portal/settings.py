@@ -156,29 +156,25 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.AllowAny",
     ),
 }
+import os
 
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = int(os.environ.get("EMAIL_PORT", 587))
 EMAIL_USE_TLS = True
 
-# EMAIL_HOST_USER = "infoikhedutportal@gmail.com"
-# EMAIL_HOST_PASSWORD = "fnrz lzsc tqwm xtdl"
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-SITE_ID = 1
+EMAIL_HOST_PASSWORDD = os.environ.get("EMAIL_HOST_PASSWORD")
 
-PASSWORD_RESET_TIMEOUT = 3600 
-
-EMAIL_SUBJECT_PREFIX = "[Ikhedut Portal] "
-DEFAULT_DOMAIN = "ikhedut-portal-latest.onrender.com"
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
 
 
 
-DEFAULT_FROM_EMAIL = "Ikhedut Portal Support <infoikhedutportal@gmail.com>"
+CSRF_TRUSTED_ORIGINS = [
+    "https://ikhedut-portal-latest.onrender.com",
+]
 
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/userprofile/"
