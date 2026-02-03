@@ -16,9 +16,6 @@ env/
 # Collected static files (DO NOT COMMIT)
 staticfiles/
 
-# Media uploads
-media/
-
 # Logs
 *.log
 
