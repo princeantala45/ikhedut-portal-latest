@@ -13,10 +13,14 @@ class Contact(models.Model):
         return self.name    
     
 class Signup(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="signup"
+    )
     mobile = models.CharField(max_length=60)
-    image = models.ImageField(upload_to="userimages/",default="media/userimages/default.png")
-    
+    image = models.ImageField(upload_to="userimages/", blank=True, null=True)
+ 
     def __str__(self):
         return self.user.username
 
@@ -59,7 +63,7 @@ class Cart(models.Model):
 class Cartitems(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="items")
     product = models.ForeignKey(CropSale, on_delete=models.SET_NULL, null=True, blank=True)
-    quantity = models.PositiveIntegerField(default=1)
+    quantity = models.PositiveIntegerField(default=20)
     added_at = models.DateTimeField(auto_now_add=True)
     
     def is_expired(self):

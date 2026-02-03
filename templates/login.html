@@ -3,25 +3,6 @@
 
 {% block content %}
 
-{% comment %} {% for message in messages %}
-<div
-  class="alert-message fixed top-5 right-5 z-50 w-80 rounded-md border p-4 shadow-lg overflow-hidden
-    transition-all duration-300
-    {% if message.tags == 'error' %}
-      bg-red-100 text-red-700 border-red-300
-    {% else %}
-      bg-green-100 text-green-700 border-green-300
-    {% endif %}
-  "
->
-  <p class="text-sm font-medium">{{ message }}</p>
-
-  <!-- timer line -->
-  <div class="absolute bottom-0 left-0 h-1 w-full bg-current timer-line"></div>
-</div>
-{% endfor %} {% endcomment %}
-
-
 <div class="flex items-start sm:items-center justify-center bg-gray-100 px-4 pt-4 pb-4 sm:py-0">
 
   <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
@@ -29,13 +10,12 @@
       Welcome to ikhedut-Portal
     </h2>
 
-    <form method="post" class="space-y-5" autocomplete="off">
-      {% csrf_token %}
+<form id="login-form" class="space-y-5" autocomplete="off">
       <div>
         <label class="block text-sm font-medium text-gray-600 mb-1">
           Username
         </label>
-        <input type="text" name="username" required placeholder="Enter your username"
+        <input id="username" type="text" name="username" required placeholder="Enter your username"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" />
       </div>
 
@@ -43,7 +23,7 @@
         <label class="block text-sm font-medium text-gray-600 mb-1">
           Password
         </label>
-        <input type="password" name="password" required placeholder="Enter your password"
+        <input id="password" type="password" name="password" required placeholder="Enter your password"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500" />
       </div>
 
@@ -86,4 +66,57 @@
     }
   }, 3000); // 3 seconds
 </script>
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        const cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+            cookie = cookie.trim();
+            if (cookie.startsWith(name + "=")) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+const csrfToken = getCookie("csrftoken");
+
+document.getElementById("login-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    fetch("/login_api/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken
+        },
+        credentials: "same-origin",   // 🔑 THIS SAVES SESSION
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.access) {
+            // JWT (optional, for APIs)
+            localStorage.setItem("access", data.access);
+            localStorage.setItem("refresh", data.refresh);
+
+            // Reload page so navbar updates
+            window.location.href = "/";
+        } else {
+            alert("Login failed");
+        }
+    });
+});
+</script>
+
+
 {% endblock content %}

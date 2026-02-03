@@ -34,8 +34,7 @@ class CropSaleAdmin(admin.ModelAdmin):
             if obj.image:
                 obj.image.delete(save=False)
             obj.delete()
-# AD ADMIN
-# -------------------------
+
 @admin.register(Ad)
 class AdAdmin(admin.ModelAdmin):
     list_display = ("productname", "price", "city", "is_approved")

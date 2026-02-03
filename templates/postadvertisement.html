@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData(form);
 
         try {
-            const response = await fetch("/api/advertisement/", {
+            const response = await fetch("/postad/", {
                 method: "POST",
                 headers: {
                     "X-CSRFToken": getCookie("csrftoken")

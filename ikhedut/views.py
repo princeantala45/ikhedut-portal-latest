@@ -1,107 +1,130 @@
-from django.shortcuts import render,redirect
-from .models import Cart,Cartitems,Contact,Signup,Ad,CropSale,Order,OrderItem
+from .models import *
 from django.db import transaction
+from rest_framework.views import APIView
+from django.shortcuts import redirect
 from django.contrib import messages
-
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as auth_logout
-from django.contrib.auth import authenticate, login as auth_login
-
+from django.contrib.auth import authenticate
 from django.utils import timezone
-from datetime import timedelta
-from django.shortcuts import get_object_or_404
 from rest_framework import viewsets,serializers
 from rest_framework.permissions import AllowAny,IsAdminUser,IsAuthenticated
-from .serializer import Cropsaleserializers,Conactserializers,OrderSerializer,PostAdvertisementSerializer
-
-from rest_framework.parsers import MultiPartParser, FormParser
+from .serializer import *
 from django.db.models import Sum, Min
-
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import csrf_exempt
-from rest_framework.decorators import api_view, permission_classes
-
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.response import Response
-
-from django.db import transaction
-
+from rest_framework.response  import Response
 from rest_framework import status
-from rest_framework.response import Response
+from .models import CropSale
+from rest_framework.parsers import MultiPartParser, FormParser,JSONParser
+from rest_framework import generics
+from django.shortcuts import render, get_object_or_404
+from rest_framework.decorators import authentication_classes
+from rest_framework.decorators import api_view, permission_classes
+from django.contrib.auth import login
 
-class CropsaleView(viewsets.ModelViewSet):
-    queryset = CropSale.objects.all()
-    serializer_class = Cropsaleserializers
+
+from .models import *
+from .serializer import *
+
+
+@login_required
+def postadvertisement(request):
+   return render(request,'postadvertisement.html')
+class SellCropsGeneric(generics.ListAPIView,generics.CreateAPIView):
+    queryset=CropSale.objects.all()
+    serializer_class=Cropsaleserializers
+    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
-    parser_classes = [MultiPartParser, FormParser]
-
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        if not serializer.is_valid():
-            print("❌ SERIALIZER ERRORS:", serializer.errors)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        self.perform_create(serializer)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+    
     def perform_create(self, serializer):
         serializer.save(seller=self.request.user)
+    
+class SellCropsGeneric1(generics.UpdateAPIView,generics.DestroyAPIView):
+    queryset=CropSale.objects.all()
+    serializer_class=Cropsaleserializers
+    lookup_field='id'
 
-@login_required(login_url="/login")
-def sellcrops_page(request):
-    return render(request, "sellcrops.html")
+class PostAdGeneric(generics.ListAPIView,generics.CreateAPIView):
+    queryset=Ad.objects.all()
+    serializer_class=PostAdvertisementSerializer
+    permission_classes = [IsAuthenticated]
 
-class ContactView(viewsets.ModelViewSet):
-    queryset=Contact.objects.all()
-    serializer_class=Conactserializers
-    permission_classes=[IsAuthenticated]
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
-@require_POST
-@login_required(login_url="/login")
-def sellcrops_api(request):
-    # print(f"DEBUG: Submitting crop for user: {request.user}") # terminal for this!
-    crop_name = request.POST.get("crop")
-    quantity = request.POST.get("quantity")
-    price = request.POST.get("price")
-    image = request.FILES.get("image")
+class PostAdGeneric1(generics.ListAPIView,generics.CreateAPIView):
+    queryset=Ad.objects.all()
+    serializer_class=PostAdvertisementSerializer
+    lookup_field='id'
 
-    # Explicitly link request.user to the seller field
-    CropSale.objects.create(
-        seller=request.user, 
-        crop=crop_name,
-        quantity=int(quantity),
-        price=int(price),
-        image=image,
-        is_approved=False
+    
+class RegistrerUser(APIView):
+    authentication_classes = []   
+    permission_classes = [AllowAny]
+    parser_classes = [JSONParser,MultiPartParser, FormParser]
+
+    def post(self, request):
+
+        serializer = UserSerializers(data=request.data)
+
+        if not serializer.is_valid():
+            print("ERRORS:", serializer.errors)
+            return Response(serializer.errors, status=400)
+
+        user = serializer.save()
+        print("USER CREATED:", user.id, user.username)
+
+        refresh = RefreshToken.for_user(user)
+
+        return Response(
+            {
+                "message": "User registered successfully",
+                "refresh": str(refresh),
+                "access": str(refresh.access_token),
+            },
+            status=201
+        )
+
+
+def login_page(request):
+    return render(request, "login.html")
+
+
+@api_view(["POST"])
+@permission_classes([AllowAny])
+def login_api(request):
+    user = authenticate(
+        username=request.data.get("username"),
+        password=request.data.get("password")
     )
 
-    return JsonResponse({"message": "success"}, status=201)
+    if not user:
+        return Response({"error": "Invalid credentials"}, status=401)
 
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from .models import CropSale
+    login(request, user)
 
-@login_required(login_url="/login")
-def delete_crop(request, id):
-    # Only allow the owner of the crop to delete it
-    crop = get_object_or_404(CropSale, id=id, seller=request.user)
+    refresh = RefreshToken.for_user(user)
+
+    return Response({
+        "access": str(refresh.access_token),
+        "refresh": str(refresh),
+        "username": user.username
+    })
     
-    if request.method == "POST":
-        # Cleanup the image from media folder if it exists
-        if crop.image:
-            crop.image.delete(save=False)
-            
-        crop.delete()
-        messages.success(request, "Crop submission deleted successfully.")
-        
-    return redirect("userprofile")
+@login_required
+def sellcrops_page(request):
+    return render(request, "sellcrops.html")
+@permission_classes([IsAuthenticated])
+class ContactView(viewsets.ModelViewSet):
+    queryset = Contact.objects.all()
+    serializer_class = Conactserializers
+    permission_classes = [IsAuthenticated]
 
-
+@login_required
 def contact(request):
     return render(request,"contact.html")
     
@@ -116,7 +139,7 @@ def agricultureguidance(request):
     return render(request,"agricultureguidance.html")
 
 @api_view(["GET"])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def buy_crops_api(request):
     sales = CropSale.objects.filter(is_approved=True)
 
@@ -138,7 +161,40 @@ def buy_crops_api(request):
 
     return Response(list(crops.values()))
 
-@login_required   
+@login_required
+def cart(request):
+    cart = Cart.objects.filter(user=request.user, is_paid=False).first()
+
+    items = []
+    total = 0
+
+    if cart:
+        items = cart.items.select_related("product")
+        total = sum(item.subtotal for item in items)
+
+    return render(request, "cart.html", {
+        "items": items,
+        "total": total,
+        "cart_created_at": cart.created_at if cart else None
+    })
+
+@login_required
+def checkout(request):
+    cart = Cart.objects.filter(user=request.user, is_paid=False).first()
+
+    if not cart or not cart.items.exists():
+        messages.error(request, "Your cart is empty.")
+        return redirect("cart")
+
+    items = cart.items.select_related("product")
+    total = sum(item.subtotal for item in items)
+
+    return render(request, "checkout.html", {
+        "items": items,
+        "total": total,
+    })
+
+@login_required
 def buycrops(request):
     return render(request, "buycrops.html")
 
@@ -158,158 +214,13 @@ def fertilizer(request):
     return render(request,"fertilizer.html")
 
 def signup(request):
-    if request.method == "POST":
-        username = request.POST.get("username", "").strip()
-        email = request.POST.get("email", "").strip()
-        mobile = request.POST.get("mobile", "").strip()
-        password = request.POST.get("password")
-        repassword = request.POST.get("repassword")
-        image=request.FILES.get("image")
-
-        if not all([username, email, mobile, password, repassword]):
-            messages.error(request, "All fields are required")
-            return render(request, "signup.html")
-
-        if password != repassword:
-            messages.error(request, "Passwords do not match")
-            return render(request, "signup.html")
-
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "Username already exists")
-            return render(request, "signup.html")
-        
-        if User.objects.filter(email=email).exists():
-            messages.error(request, "Email already exists")
-            return render(request, "signup.html")
-
-        user = User.objects.create_user(
-            username=username,
-            email=email,
-            password=password
-        )
-
-        Signup.objects.create(
-            user=user,
-            mobile=mobile,
-            image=image
-        )
-
-        messages.success(request, "Registration successful")
-        return redirect("login")
-
-    return render(request, "signup.html")
-
-
-@api_view(["POST"])
-@permission_classes([AllowAny])
-def signup_api(request):
-    username = request.data.get("username")
-    email = request.data.get("email")
-    password = request.data.get("password")
-    mobile = request.data.get("mobile")
-    image = request.FILES.get("image")
-
-    if not all([username, email, password, mobile]):
-        return Response({"error": "All fields required"}, status=400)
-
-    if User.objects.filter(username=username).exists():
-        return Response({"error": "Username exists"}, status=400)
-
-    user = User.objects.create_user(
-        username=username,
-        email=email,
-        password=password
-    )
-
-    Signup.objects.create(
-        user=user,
-        mobile=mobile,
-        image=image
-    )
-
-    refresh = RefreshToken.for_user(user)
-
-    return Response({
-        "access": str(refresh.access_token),
-        "refresh": str(refresh),
-    }, status=201)
-
-def user_login(request):
-    if request.method == "POST":
-        username = request.POST.get("username", "").strip()
-        password = request.POST.get("password")
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            auth_login(request, user)
-            return redirect("/")
-        else:
-            messages.error(request, "Invalid username or password")
-
-    return render(request, "login.html")
+    return render(request,"signup.html")
 
 def logout(request):
     auth_logout(request)
     return render(request, "logout.html")
 
-@login_required(login_url="login")
-def cart(request):
-    cart = Cart.objects.filter(user=request.user, is_paid=False).first()
 
-    if not cart:
-        return render(request, "cart.html", {"items": [], "total": 0})
-
-    items = cart.items.select_related("product")
-    total = sum(item.subtotal for item in items)
-
-    return render(request, "cart.html", {
-        "items": items,
-        "total": round(total, 2),
-        "now": timezone.now(),
-    })
-
-
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def api_add_to_cart(request):
-    crop_name = request.data.get("crop_name")
-    quantity = int(request.data.get("quantity", 1))
-
-    # pick cheapest available stock
-    crop = (
-        CropSale.objects
-        .filter(crop__iexact=crop_name, is_approved=True, quantity__gte=quantity)
-        .order_by("price")
-        .first()
-    )
-
-    if not crop:
-        return Response({"error": "Not enough stock"}, status=400)
-
-    with transaction.atomic():
-        cart, _ = Cart.objects.get_or_create(
-            user=request.user,
-            is_paid=False
-        )
-
-        item, created = Cartitems.objects.get_or_create(
-            cart=cart,
-            product=crop,
-            defaults={"quantity": quantity}
-        )
-
-        if not created:
-            item.quantity += quantity
-            item.save()
-
-        # 🔽 DECREASE STOCK
-        crop.quantity -= quantity
-        crop.save()
-
-    return Response({"success": True})
-
-@login_required(login_url="login")
 def remove_from_cart(request, item_id):
     item = get_object_or_404(Cartitems, id=item_id)
 
@@ -317,7 +228,7 @@ def remove_from_cart(request, item_id):
     qty = item.quantity
 
     with transaction.atomic():
-        # 🔼 RESTORE STOCK
+        
         if product:
             product.quantity += qty
             product.save()
@@ -328,7 +239,6 @@ def remove_from_cart(request, item_id):
     return redirect("cart")
 
 @require_POST
-@login_required
 def expire_cart_item(request, item_id):
     cart_item = get_object_or_404(
         Cartitems,
@@ -350,11 +260,7 @@ def expire_cart_item(request, item_id):
 
     return JsonResponse({"status": "expired"})
 
-
-
-
-
-@login_required(login_url="/login")
+@login_required
 def postedadvertisement(request):
     order = request.GET.get("order", "new")
 
@@ -368,20 +274,7 @@ def postedadvertisement(request):
         "order": order,
     })
 
-@login_required(login_url="login")
-def postadvertisement(request):
-   return render(request,'postadvertisement.html')
 
-class AdvertisementViewSet(viewsets.ModelViewSet):
-    queryset = Ad.objects.all()
-    serializer_class = PostAdvertisementSerializer
-    permission_classes = [IsAuthenticated]
-    parser_classes = [MultiPartParser, FormParser]
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-@login_required
 @require_POST
 def delete_advertisement(request, id):
     ad = get_object_or_404(
@@ -394,101 +287,28 @@ def delete_advertisement(request, id):
     return redirect("userprofile")
 
 
-
-
-
-
-@api_view(["POST"])
-@permission_classes([IsAuthenticated])
-def checkout_api(request):
-    user = request.user
-
-    cart = Cart.objects.filter(user=user, is_paid=False).first()
-    if not cart or not cart.items.exists():
-        return Response({"error": "Cart is empty"}, status=400)
-
-    items = cart.items.select_related("product")
-    total = sum(item.subtotal for item in items)
-
-    serializer = OrderSerializer(data=request.data)
-    serializer.is_valid(raise_exception=True)
-    
-    # 1. Get the validated data
-    data = serializer.validated_data
-    
-    # 2. Remove total_amount from data if it exists to avoid the "multiple values" error
-    data.pop('total_amount', None)
-
-    with transaction.atomic():
-        # 3. Create the order using manual total and the rest of the data
-        order = Order.objects.create(
-            user=user,
-            total_amount=total,  # We use the calculated total here
-            **data               # This now contains fullname, mobile, address, etc.
-        )
-
-        for item in items:
-            OrderItem.objects.create(
-                order=order,
-                product=item.product,
-                quantity=item.quantity,
-                price=item.subtotal
-            )
-
-        cart.is_paid = True
-        cart.save()
-
-    return Response(
-        {
-            "success": True,
-            "order_id": order.id,
-            "total": total
-        },
-        status=201
-    )
-
-@login_required(login_url="login")
-def checkout(request):
-    cart = Cart.objects.filter(user=request.user, is_paid=False).first()
-
-    if not cart:
-        return render(request, "checkout.html", {
-            "items": [],
-            "total": 0
-        })
-
-    items = cart.items.select_related("product")
-    total = sum(item.subtotal for item in items)
-
-    return render(request, "checkout.html", {
-        "items": items,
-        "total": round(total, 2)
-    })
-
 def order_success(request):
     return render(request, "order_success.html")
 
 def spraypump(request):
     return render(request,'spraypump.html')
 
-@login_required(login_url="/login")
+@login_required
 def userprofile(request):
     user = request.user
+
     profile = Signup.objects.filter(user=user).first()
+    crop_sales = CropSale.objects.filter(seller=user).order_by("-id")
     orders = Order.objects.filter(user=user).order_by("-created_at")
     ads = Ad.objects.filter(user=user).order_by("-id")
-    
-    crop_sales = CropSale.objects.filter(seller=user).order_by("-id")
 
     return render(request, "userprofile.html", {
-        "user": user,
         "profile": profile,
+        "crop_sales": crop_sales,
         "orders": orders,
         "ads": ads,
-        "crop_sales": crop_sales, 
     })
-    
-@login_required(login_url="/login")
+ 
 def cancel_order(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
 
@@ -502,7 +322,6 @@ def cancel_order(request, order_id):
     messages.success(request, "Order cancelled successfully.")
     return redirect("userprofile")
 
-@login_required(login_url="/login")
 def request_cancel_order(request, order_id):
     order = get_object_or_404(Order, id=order_id, user=request.user)
 
@@ -516,3 +335,161 @@ def request_cancel_order(request, order_id):
 
     messages.success(request,"Cancellation request sent to admin.")
     return redirect("userprofile")
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def api_my_crops(request):
+    if request.method == "GET":
+        crops = CropSale.objects.filter(seller=request.user)
+        return Response(Cropsaleserializers(crops, many=True).data)
+
+    serializer = Cropsaleserializers(data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save(seller=request.user)
+    return Response({"success": True}, status=201)
+
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+
+@login_required
+@require_POST
+def delete_crop(request, id):
+    crop = get_object_or_404(CropSale, id=id, seller=request.user)
+
+    if crop.image:
+        crop.image.delete(save=False)
+
+    crop.delete()
+    messages.success(request, "Crop submission deleted successfully.")
+    return redirect("userprofile")
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def api_add_to_cart(request):
+    crop_name = request.data.get("crop_name")
+    quantity = int(request.data.get("quantity", 1))
+
+    crop = CropSale.objects.select_for_update().filter(
+        crop__iexact=crop_name,
+        is_approved=True,
+        quantity__gte=quantity
+    ).order_by("price").first()
+
+
+    if not crop:
+        return Response({"error": "Not enough stock"}, status=400)
+
+    with transaction.atomic():
+        cart, _ = Cart.objects.get_or_create(
+            user=request.user,
+            is_paid=False
+        )
+
+        item, created = Cartitems.objects.get_or_create(
+            cart=cart,
+            product=crop,
+            defaults={"quantity": quantity}
+        )
+
+        if not created:
+            item.quantity += quantity
+            item.save()
+
+        crop.quantity -= quantity
+        crop.save()
+
+    return Response({"success": True})
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def api_my_cart(request):
+    cart = Cart.objects.filter(user=request.user, is_paid=False).first()
+
+    if not cart:
+        return Response([])
+
+    items = cart.items.select_related("product")
+
+    data = []
+    for item in items:
+        data.append({
+            "id": item.id,
+            "crop": item.product.crop,
+            "quantity": item.quantity,
+            "price": item.subtotal,
+        })
+
+    return Response(data)
+
+@api_view(["POST"])
+@permission_classes([IsAuthenticated])
+def api_remove_cart_item(request, item_id):
+    item = get_object_or_404(Cartitems, id=item_id, cart__user=request.user)
+
+    item.product.quantity += item.quantity
+    item.product.save()
+
+    item.delete()
+    return Response({"success": True})
+
+@api_view(["POST"])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def checkout_api(request):
+    print("AUTH HEADER:", request.headers.get("Authorization"))
+    print("USER:", request.user)
+    cart = Cart.objects.filter(user=request.user, is_paid=False).first()
+    if not cart or not cart.items.exists():
+        return Response({"error": "Cart is empty"}, status=400)
+
+    total = sum(item.subtotal for item in cart.items.all())
+
+    serializer = OrderSerializer(data=request.data)
+    serializer.is_valid(raise_exception=True)
+
+    order = Order.objects.create(
+        user=request.user,
+        total_amount=total,
+        **serializer.validated_data
+    )
+
+    for item in cart.items.all():
+        OrderItem.objects.create(
+            order=order,
+            product=item.product,
+            quantity=item.quantity,
+            price=item.subtotal
+        )
+
+    cart.is_paid = True
+    cart.save()
+
+    return Response({"success": True, "order_id": order.id})
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def api_user_profile(request):
+    user = request.user
+    profile = Signup.objects.filter(user=user).first()
+
+    return Response({
+        "username": user.username,
+        "email": user.email,
+        "mobile": profile.mobile if profile else ""
+    })
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def api_my_orders(request):
+    orders = Order.objects.filter(user=request.user).order_by("-created_at")
+
+    data = []
+    for o in orders:
+        data.append({
+            "id": o.id,
+            "total": o.total_amount,
+            "status": o.get_status_display(),
+            "created_at": o.created_at.strftime("%d %b %Y"),
+        })
+
+    return Response(data)

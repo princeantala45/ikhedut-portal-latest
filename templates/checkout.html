@@ -15,31 +15,31 @@
       Order Summary
     </h3>
 
-<div class="overflow-x-auto">
-  <table class="w-full min-w-[600px] border-collapse text-sm md:text-base">
-      <thead>
-        <tr class="border-b">
-          <th class="text-left py-2">Crop</th>
-          <th class="text-left py-2">Price / 20 KG</th>
-          <th class="text-left py-2">Quantity</th>
-          <th class="text-left py-2">Subtotal</th>
-        </tr>
-      </thead>
+    <div class="overflow-x-auto">
+      <table class="w-full min-w-[600px] border-collapse text-sm md:text-base">
+        <thead>
+          <tr class="border-b">
+            <th class="text-left py-2">Crop</th>
+            <th class="text-left py-2">Price / 20 KG</th>
+            <th class="text-left py-2">Quantity</th>
+            <th class="text-left py-2">Subtotal</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        {% for item in items %}
-        <tr class="border-b">
-          <td class="py-2">{{ item.product.crop|title }}</td>
-          <td class="py-2">₹{{ item.product.price }}</td>
-          <td class="py-2">{{ item.quantity }} KG</td>
-          <td class="py-2 font-semibold">
-            ₹{{ item.subtotal }}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-</div>
+        <tbody>
+          {% for item in items %}
+          <tr class="border-b">
+            <td class="py-2">{{ item.product.crop|title }}</td>
+            <td class="py-2">₹{{ item.product.price }}</td>
+            <td class="py-2">{{ item.quantity }} KG</td>
+            <td class="py-2 font-semibold">
+              ₹{{ item.subtotal }}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
 
     <div class="flex justify-end mt-4 text-lg font-bold">
@@ -60,19 +60,26 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-        <input type="text" name="fullname" id="fullname" placeholder="Full Name" class="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400" required>
+        <input type="text" name="fullname" id="fullname" placeholder="Full Name"
+          class="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400"
+          required>
 
-        <input type="text" name="mobile" id="mobile" placeholder="Mobile Number" class="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400" required>
+        <input type="text" name="mobile" id="mobile" placeholder="Mobile Number"
+          class="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400"
+          required>
 
-        <input type="text" name="city" id="city" placeholder="City" class="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400" required>
+        <input type="text" name="city" id="city" placeholder="City"
+          class="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400"
+          required>
 
-        <input type="text" name="pincode" id="pincode" placeholder="Pincode" class="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400" required>
+        <input type="text" name="pincode" id="pincode" placeholder="Pincode"
+          class="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400"
+          required>
 
       </div>
 
       <textarea name="address" placeholder="Full Address" class="border p-3 rounded w-full mt-3 md:mt-4
-  focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400" rows="3"
-        required></textarea>
+  focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400" rows="3" required></textarea>
 
       <!-- PAYMENT SELECTION -->
       <div class="bg-white shadow rounded-lg p-6 mb-8">
@@ -127,7 +134,7 @@ has-[:checked]:border-green-600 has-[:checked]:bg-green-50">
           </label>
 
         </div>
-      </div> 
+      </div>
 
       <!-- DYNAMIC PAYMENT FIELDS -->
       <div class="mt-6 space-y-4">
@@ -145,31 +152,32 @@ has-[:checked]:border-green-600 has-[:checked]:bg-green-50">
           <input type="text" name="card_expiry" id="expiry" placeholder="Expiry (MM/YY)"
             class="w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400" />
 
-          <input type="text" name="card_cvv" id="cvv" placeholder="CVV" class="w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400" />
+          <input type="text" name="card_cvv" id="cvv" placeholder="CVV"
+            class="w-full px-4 py-3 border rounded focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400" />
         </div>
 
         <!-- UPI FIELD -->
         <div id="upi-fields" class="hidden bg-gray-50 p-4 rounded-lg border">
           <h4 class="font-semibold mb-3">UPI ID</h4>
-          <input type="text" name="upi_id" id="upi_id" placeholder="yourname@upi" class="border p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400">
+          <input type="text" name="upi_id" id="upi_id" placeholder="yourname@upi"
+            class="border p-3 rounded w-full focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-green-400">
         </div>
 
       </div>
 
 
-<div class="pt-4 flex justify-center md:justify-start">
-    <button type="submit" class="cssbuttons-io-button">
-    Place Order
-    <div class="icon">
-      <svg height="24" width="24" viewBox="0 0 24 24">
-        <path d="M0 0h24v24H0z" fill="none"></path>
-        <path
-          d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-          fill="currentColor"></path>
-      </svg>
-    </div>
-  </button>
-  </div>
+      <div class="pt-4 flex justify-center md:justify-start">
+        <button type="submit" class="cssbuttons-io-button">
+          Place Order
+          <div class="icon">
+            <svg height="24" width="24" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                fill="currentColor"></path>
+            </svg>
+          </div>
+        </button>
+      </div>
     </form>
 
   </div>
@@ -227,93 +235,100 @@ has-[:checked]:border-green-600 has-[:checked]:bg-green-50">
       e.target.value = v;
     });
 
-/* ========= PAYMENT METHOD TOGGLE ========= */
+    /* ========= PAYMENT METHOD TOGGLE ========= */
 
-const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
-const cardFields = document.getElementById("card-fields");
-const upiFields = document.getElementById("upi-fields");
+    const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
+    const cardFields = document.getElementById("card-fields");
+    const upiFields = document.getElementById("upi-fields");
 
-const cardInputs = [
-  document.getElementById("cardnumber"),
-  document.getElementById("cardholdername"),
-  document.getElementById("expiry"),
-  document.getElementById("cvv"),
-];
+    const cardInputs = [
+      document.getElementById("cardnumber"),
+      document.getElementById("cardholdername"),
+      document.getElementById("expiry"),
+      document.getElementById("cvv"),
+    ];
 
-const upiInput = document.getElementById("upi_id");
+    const upiInput = document.getElementById("upi_id");
 
-function resetPaymentFields() {
-  cardFields.classList.add("hidden");
-  upiFields.classList.add("hidden");
+    function resetPaymentFields() {
+      cardFields.classList.add("hidden");
+      upiFields.classList.add("hidden");
 
-  cardInputs.forEach(input => {
-    input.required = false;
-    input.value = "";
-  });
+      cardInputs.forEach(input => {
+        input.required = false;
+        input.value = "";
+      });
 
-  upiInput.required = false;
-  upiInput.value = "";
-}
-
-paymentRadios.forEach(radio => {
-  radio.addEventListener("change", e => {
-    resetPaymentFields();
-
-    if (e.target.value === "CARD") {
-      cardFields.classList.remove("hidden");
-      cardInputs.forEach(input => input.required = true);
+      upiInput.required = false;
+      upiInput.value = "";
     }
 
-    if (e.target.value === "UPI") {
-      upiFields.classList.remove("hidden");
-      upiInput.required = true;
-    }
-  });
-});
+    paymentRadios.forEach(radio => {
+      radio.addEventListener("change", e => {
+        resetPaymentFields();
+
+        if (e.target.value === "CARD") {
+          cardFields.classList.remove("hidden");
+          cardInputs.forEach(input => input.required = true);
+        }
+
+        if (e.target.value === "UPI") {
+          upiFields.classList.remove("hidden");
+          upiInput.required = true;
+        }
+      });
+    });
     /* ========= FINAL SUBMIT VALIDATION ========= */
 
-const checkoutForm = document.getElementById("checkout-form");
+    const checkoutForm = document.getElementById("checkout-form");
+    checkoutForm.addEventListener("submit", async e => {
+      e.preventDefault();
 
-checkoutForm.addEventListener("submit", async e => {
-  e.preventDefault();
+      const paymentMethod = checkoutForm.querySelector(
+        'input[name="payment_method"]:checked'
+      );
 
-  const paymentMethod = checkoutForm.querySelector('input[name="payment_method"]:checked');
-  if (!paymentMethod) {
-    alert("Please select a payment method.");
-    return;
-  }
+      if (!paymentMethod) {
+        alert("Please select a payment method.");
+        return;
+      }
 
-  const formData = new FormData(checkoutForm);
-  const payload = Object.fromEntries(formData.entries());
-  
-  // ADD THIS LINE: Pass the total from Django context to JS
-  payload.total_amount = "{{ total }}"; 
+      const token = localStorage.getItem("access");
+      if (!token) {
+        alert("Your session expired. Please login again.");
+        window.location.href = "/login/";
+        return;
+      }
 
-  try {
-    const res = await fetch("/api/checkout/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
-      },
-      body: JSON.stringify(payload)
+      const formData = new FormData(checkoutForm);
+      const payload = Object.fromEntries(formData.entries());
+
+      payload.total_amount = Number("{{ total }}");
+
+      try {
+        const res = await fetch("/api/checkout/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+          alert("Order placed successfully!");
+          window.location.href = "/order_success";
+        } else {
+          alert(result.error || "Checkout failed. Please check your details.");
+        }
+      } catch (error) {
+        console.error("Submission error:", error);
+        alert("An error occurred. Please try again.");
+      }
     });
-    // ... rest of your code
-    const result = await res.json();
-
-    if (res.ok) {
-      alert("Order placed successfully!");
-      window.location.href = "/order_success";
-    } else {
-      // Logic to display specific backend errors
-      alert(result.error || "Checkout failed. Please check your details.");
-    }
-  } catch (error) {
-    console.error("Submission error:", error);
-    alert("An error occurred. Please try again.");
-  }
-});
-});
+  });
 </script>
 
 {% endblock %}

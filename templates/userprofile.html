@@ -116,7 +116,9 @@
 
     </div>
     
-    <div id="section-crops" class="section bg-white rounded-2xl shadow-md p-4 sm:p-6">
+<div id="section-crops"
+     class="section bg-white rounded-2xl shadow-md p-4 sm:p-6
+     {% if not crop_sales %}hidden{% endif %}">
         <h2 class="text-xl sm:text-2xl font-semibold mb-6 border-b pb-2">
             My Crop Sale Submissions
         </h2>
@@ -183,7 +185,10 @@
         {% endif %}
     </div>
     <!-- ================= ORDERS ================= -->
-    <div id="section-orders" class="section hidden bg-white rounded-2xl shadow-md p-6">
+  <div id="section-orders"
+     class="section bg-white rounded-2xl shadow-md p-6
+     {% if crop_sales %}hidden{% endif %}">
+
         <h2 class="text-2xl font-semibold mb-6 border-b pb-2">
             My Orders
         </h2>

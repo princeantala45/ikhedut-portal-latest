@@ -152,31 +152,62 @@ cropSelect.addEventListener("change", () => {
 });
 
 </script>
-
 <script>
-    document.getElementById("sellForm").addEventListener("submit", async function (e) {
-        e.preventDefault();
+document.getElementById("sellForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-        const formData = new FormData(this);
+    let access = localStorage.getItem("access");
+    let refresh = localStorage.getItem("refresh");
 
-        const response = await fetch("/api/sellcrops/", {
+    if (!access) {
+        window.location.href = "/login/";
+        return;
+    }
+
+    const formData = new FormData(this);
+
+    let response = await fetch("/generic-sellcrops/", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${access}`
+        },
+        body: formData
+    });
+
+    if (response.status === 401 && refresh) {
+        const refreshRes = await fetch("/api/token/refresh/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ refresh })
+        });
+
+        if (!refreshRes.ok) {
+            localStorage.clear();
+            window.location.href = "/login/";
+            return;
+        }
+
+        const refreshData = await refreshRes.json();
+        access = refreshData.access;
+        localStorage.setItem("access", access);
+
+        response = await fetch("/generic-sellcrops/", {
             method: "POST",
             headers: {
-                "X-CSRFToken": "{{ csrf_token }}"
+                "Authorization": `Bearer ${access}`
             },
             body: formData
         });
+    }
 
-        const data = await response.json();
-
-if (response.ok) {
-    alert("Crop submitted successfully waiting for admin approval");
-    window.location.reload();
-        } else {
-            alert("Something went wrong");
-            console.log(data);
-        }
-    });
+    if (response.ok) {
+        alert("Crop submitted successfully, Please Wait for Admin Approval");
+        window.location.reload();
+    } else {
+        alert("Submission failed");
+    }
+});
 </script>
+
 
 {% endblock content %}

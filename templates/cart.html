@@ -71,11 +71,6 @@
     {% endfor %}
 
   </div>
-{% if cart_created_at %}
-<div class="mb-4 text-sm font-semibold text-red-600">
-  Cart expires in: <span id="time-left">30:00</span>
-</div>
-{% endif %}
 
   <div class="bg-white rounded-xl shadow-sm border p-6 h-fit lg:sticky lg:top-24 mt-4 lg:mt-0">
 
@@ -177,41 +172,52 @@
 </div>
 
 <script>
-  let currentItemId = null;
+function getCSRFToken() {
+  const el = document.getElementById("global-csrf");
+  return el ? el.value : "";
+}
+let currentItemId = null;
 
-  function openRemoveModal(itemId, actionUrl) {
-    currentItemId = itemId;
-    const modal = document.getElementById("removeModal");
-    const form = document.getElementById("removeForm");
+function openRemoveModal(itemId, actionUrl) {
+  currentItemId = itemId;
 
-    form.action = actionUrl;
-    modal.classList.remove("hidden");
-    modal.classList.add("flex");
+  const modal = document.getElementById("removeModal");
+  const form = document.getElementById("removeForm");
+
+  form.action = actionUrl;
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+}
+
+function closeRemoveModal() {
+  const modal = document.getElementById("removeModal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+  currentItemId = null;
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const removeForm = document.getElementById("removeForm");
+
+  if (removeForm) {
+    removeForm.addEventListener("submit", () => {
+      if (!currentItemId) return;
+
+      const item = document.getElementById(`cart-item-${currentItemId}`);
+      if (item) {
+        item.style.opacity = "0";
+        item.style.transform = "translateX(20px)";
+      }
+    });
   }
+});
 
-  function closeRemoveModal() {
-    const modal = document.getElementById("removeModal");
-    modal.classList.add("hidden");
-    modal.classList.remove("flex");
-    currentItemId = null;
-  }
 
-  document.getElementById("removeForm").addEventListener("submit", function () {
-    if (!currentItemId) return;
+const LIMIT = 10 * 60 * 1000;
+const expiredItems = new Set();
+let reloadTriggered = false;
 
-    const item = document.getElementById(`cart-item-${currentItemId}`);
-    if (item) {
-      item.style.opacity = "0";
-      item.style.transform = "translateX(20px)";
-    }
-  });
-</script>
-<script>
-  const LIMIT = 10 * 60 * 1000; 
-  const expiredItems = new Set();
-  let reloadTriggered = false;
-
- document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   updateItemTimers();
   setInterval(updateItemTimers, 1000);
 });
@@ -254,20 +260,13 @@ function updateItemTimers() {
       return;
     }
 
-    const m = Math.floor(remaining / 60000);
-    const s = Math.floor((remaining % 60000) / 1000);
+    const minutes = Math.floor(remaining / 60000);
+    const seconds = Math.floor((remaining % 60000) / 1000);
 
     el.innerText =
-      String(m).padStart(2, "0") + ":" +
-      String(s).padStart(2, "0");
+      String(minutes).padStart(2, "0") + ":" +
+      String(seconds).padStart(2, "0");
   });
-}
-
-</script>
-
-<script>
-function getCSRFToken() {
-  return document.getElementById("global-csrf").value;
 }
 </script>
 
