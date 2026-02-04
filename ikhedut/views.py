@@ -72,11 +72,9 @@ class RegistrerUser(APIView):
         serializer = UserSerializers(data=request.data)
 
         if not serializer.is_valid():
-            print("ERRORS:", serializer.errors)
             return Response(serializer.errors, status=400)
 
         user = serializer.save()
-        print("USER CREATED:", user.id, user.username)
 
         refresh = RefreshToken.for_user(user)
 
@@ -146,7 +144,7 @@ def buy_crops_api(request):
     crops = {}
 
     for sale in sales:
-        key = sale.crop.lower().strip()
+        key = sale.crop.capitalize().strip()
 
         if key not in crops:
             crops[key] = {
@@ -348,8 +346,6 @@ def api_my_crops(request):
     serializer.save(seller=request.user)
     return Response({"success": True}, status=201)
 
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
 
 @login_required
 @require_POST

@@ -3,13 +3,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
 from ikhedut import views
-from rest_framework_simplejwt.views import (TokenObtainPairView,TokenRefreshView,)   
+from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView   
 from .views import *
 
 router = routers.DefaultRouter()
 router.register(r"contact", ContactView, basename="contact")
 
-urlpatterns = [
+urlpatterns = [     
     path("api/register/", RegistrerUser.as_view()),
     path("generic-sellcrops/", SellCropsGeneric.as_view()),
     path("generic-sellcrops1/<int:id>/", SellCropsGeneric1.as_view()),
@@ -57,7 +57,6 @@ urlpatterns = [
     path("order/cancel/<int:order_id>/", views.cancel_order),
     path("order/request-cancel/<int:order_id>/", views.request_cancel_order),
     
-
 ]
 
 if settings.DEBUG:

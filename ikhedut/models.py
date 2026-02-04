@@ -13,11 +13,7 @@ class Contact(models.Model):
         return self.name    
     
 class Signup(models.Model):
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name="signup"
-    )
+    user = models.OneToOneField(User,on_delete=models.CASCADE,related_name="signup")
     mobile = models.CharField(max_length=60)
     image = models.ImageField(upload_to="userimages/", blank=True, null=True)
  
