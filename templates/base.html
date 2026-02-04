@@ -243,9 +243,8 @@
     <div class="up-errow">
         <i class="fa-solid fa-angles-up" style="font-size: 20px;"></i>
     </div>
-    <header class="w-full">
-        <div style="padding:10px;"
-            class="max-w-7xl mx-auto flex flex-col gap-2 md:grid md:grid-cols-3 md:items-center lg:flex lg:flex-row">
+    <header id="topHeader" class="w-full bg-white">
+        <div class="max-w-7xl mx-auto px-6 py-2 flex flex-col gap-2 md:grid md:grid-cols-3 md:items-center lg:flex lg:flex-row">
 
             <!-- Logo -->
             <div class="flex justify-center md:justify-start">
@@ -258,7 +257,8 @@
             <div class="flex-1 text-green-700 text-center md:text-left">
                 <p class="text-base md:text-lg font-semibold">
                     Agriculture, Farmers Welfare & Co-Operation Department
-                {% comment %} <div id="clock" class="text-red-500"></div> {% endcomment %}
+                    {% comment %}
+                <div id="clock" class="text-red-500"></div> {% endcomment %}
                 </p>
             </div>
 
@@ -311,9 +311,10 @@
             </div>
         </div>
 
-        <nav style="background-color: green;"
-            class="relative dark:bg-white-700 dark:after:pointer-events-none dark:after:absolute dark:after:inset-x-0 dark:after:bottom-0 dark:after:h-px dark:after:bg-white/10">
-            <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+<nav id="mainNav"
+     class="fixed w-full z-[1000] px-10 shadow-md
+            transition-[top] duration-500 ease-in-out" style="background-color:green;">
+
                 <div class="relative flex h-16 items-center justify-between">
                     <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                         <!-- Mobile menu button-->
@@ -371,16 +372,16 @@
                         <!-- Profile dropdown -->
                         <el-dropdown class="relative ml-3">
                             <button
-                                class="pr-5 relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                                class="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
                                 <span class="absolute -inset-1.5"></span>
                                 <span class="sr-only">Open user menu</span>
                                 {% if user.is_authenticated and user.signup and user.signup.image %}
-    <img src="{{ user.signup.image.url }}"
-         class="w-10 h-10 rounded-full object-cover border" />
-{% else %}
-    <img src="{% static 'img/default-user.png' %}"
-         class="w-10 h-10 rounded-full object-cover border" />
-{% endif %}
+                                <img src="{{ user.signup.image.url }}"
+                                    class="w-10 h-10 rounded-full object-cover border" />
+                                {% else %}
+                                <img src="{% static 'img/default-user.png' %}"
+                                    class="w-10 h-10 rounded-full object-cover border" />
+                                {% endif %}
 
 
                             </button>
@@ -433,13 +434,26 @@
                         Advertisement</a>
                 </div>
             </el-disclosure>
-        </nav>
-        </div>
+</nav>
+</div>
+<script>
+  const nav = document.getElementById("mainNav");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 100) {
+      nav.classList.remove("-top-24");
+      nav.classList.add("top-0");
+    } else {
+      nav.classList.remove("top-0");
+      nav.classList.add("-top-24");
+    }
+  });
+</script>
 
     </header>
     {% endblock header %}
 
-    {% block content %}
+    {% block content %} 
     {% endblock content %}
 
     {% block footer %}
@@ -449,10 +463,18 @@
                 <p id="footer-text">Get connected with us on social networks:</p>
             </div>
             <div class="follow-box-2">
-                <i id="instagram" class="fa-brands fa-instagram"></i>
+                <a href="https://www.instagram.com/princeantala45?igsh=MWVzMG1kZHFucXY0Ng==">
+                    <i id="instagram" class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/share/1FoYCTmEAe/">
                 <i id="facebook" class="fa-brands fa-facebook-f"></i>
+                </a>
+                <a href="https://x.com/princeantala45">
                 <i id="twitter" class="fa-brands fa-twitter"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/prince-antala-158268367?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">
                 <i id="linkedin" class="fa-brands fa-linkedin-in"></i>
+                </a>
             </div>
         </div>
         <hr>
