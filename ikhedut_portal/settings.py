@@ -36,10 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-     "django.contrib.sites", 
     'django.contrib.staticfiles',
 ]
-SITE_ID = 1
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -183,7 +181,6 @@ CSRF_TRUSTED_ORIGINS = [
 LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/userprofile/"
 LOGOUT_REDIRECT_URL = "/login/"
-
 
 
 
